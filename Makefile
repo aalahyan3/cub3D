@@ -1,0 +1,21 @@
+SRC = raycasting.c
+OBJ = $(SRC:.c=.o)
+NAME = cub3d
+FLAGS = -Wall -Wextra -Werror
+CC = cc
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CC) $(FLAGS) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
+%.o: %.c
+	$(CC) $(FLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
