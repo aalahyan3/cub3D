@@ -1,7 +1,7 @@
 SRC = raycasting.c
 OBJ = $(SRC:.c=.o)
 NAME = cub3d
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g3
 CC = cc
 
 all: $(NAME)

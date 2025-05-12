@@ -1,81 +1,198 @@
-#include <stdlib.h>
-#include <math.h>
-#include <mlx.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
+/*   Updated: 2025/05/12 13:57:14 by zkhourba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
+#include "raycasting.h"
+typedef struct s_point
+{
+	int x;
+	int y;
+} t_point;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = data->addr
+	    + (y * data->line_length
+	    +  x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
-void    draw_coluer(int x, int y,t_data *img,int colouer)
-{
-    int j = 0;
-    int i = 0;
-    while (i < 32)
-    {
 
-        j = 0;
-        while (j < 32)
-        {
-            my_mlx_pixel_put(img, (x+j), (y+i), colouer);
-            j++;
-        }
-        i++;
-    }
-    
-}
-void    draw(int map[10][10],t_data *img)
+
+void	rander_player(t_player *player, t_img *data)
 {
-    int i = 0;
-    int j = 0;
+	int	i, j;
+	int	px = player->x - 3;
+	int	py = player->y - 3;
+
+	i = 0;
+	while (i < 6)
+	{
+		j = 0;
+		while (j < 6)
+		{
+			my_mlx_pixel_put(data, px + j, py + i, 0xFF000);
+			j++;
+		}
+		i++;
+	}
+}
+
+void draw_line(int x0, int y0, int x1, int y1, t_img *img, int color)
+{
+	int dx = abs(x1 - x0);
+	int dy = abs(y1 - y0);
+	int sx = (x0 < x1) ? 1 : -1;
+	int sy = (y0 < y1) ? 1 : -1;
+	int err = dx - dy;
+
+	while (1)
+	{
+		my_mlx_pixel_put(img,x0, y0, color); 
+		if (x0 == x1 && y0 == y1)
+			break;
+
+		int e2 = 2 * err;
+		if (e2 > -dy)
+		{
+			err -= dy;
+			x0 += sx;
+		}
+		if (e2 < dx)
+		{
+			err += dx;
+			y0 += sy;
+		}
+	}
+}
+
+void draw(t_all_data *data)
+{
+  
+    int         i, j;
+    int         x0, y0;
+    int         color;
+    int         border = 0x000000;
+
+    i = 0;
     while (i < 10)
     {
         j = 0;
-        while (j < 10)
+        while (j < 10 )
         {
-            if(map[i][j] == 1)
-                draw_coluer(j*32,i*32,img,0xFF0000);
+            x0 = j * 32;
+            y0 = i * 32;
+            if (data->map[i][j] == 1)
+                color = 0xffffff;
             else
-                draw_coluer(j*32,i*32,img,0xFFFFFF);
+                color = 0x0000;
+
+            for (int yy = 0; yy < 32; yy++)
+            {
+                for (int xx = 0; xx < 32; xx++)
+                    my_mlx_pixel_put(&data->img, x0 + xx, y0 + yy, color);
+            }
+            draw_line(x0,y0,x0 + 31, y0,&data->img, border);
+            draw_line(x0 + 31 ,y0,x0 + 31, y0 + 31,&data->img, border);
+            draw_line(x0 + 31,y0 + 31,x0,y0 + 31,&data->img, border);
+            draw_line(x0,y0 + 31,x0,y0,&data->img, border);
+
             j++;
         }
         i++;
     }
-
+    rander_player(&data->player, &data->img);
+    mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img,0, 0);
 }
-int main()
+
+
+void	player_inite(t_player *player)
 {
-    void    *mlx;
-    void    *mlx_win;
-    t_data  img;
+	player->x = 160;
+	player->y = 160;
+	player->pdx = cos(player->pa)*5 ;
+	player->pdy = sin(player->pa) * 5;
+	player->pa = player->pa;
+}
 
-    int map[10][10]={{1,1,1,1,1,1,1,1,1,1},
-                    {1,1,1,1,0,1,0,1,0,1},
-                    {1,0,1,0,0,1,0,1,0,1},
-                    {1,0,1,1,0,1,0,1,0,1},
-                    {1,0,1,0,0,1,0,1,0,1},
-                    {1,0,0,0,0,0,0,0,0,1},
-                    {1,1,0,0,0,0,0,0,0,1},
-                    {1,0,1,1,0,1,0,1,0,1},
-                    {1,0,0,1,0,1,0,1,0,1},
-                    {1,1,1,1,1,1,1,1,1,1},};
-    mlx = mlx_init();
-    mlx_win=mlx_new_window(mlx,10*32,10* 32,"raycasting");
-    img.img = mlx_new_image(mlx, 10 * 32, 10 * 32);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
-    draw(map,&img);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+int	keys_press(int key_code, void *data_ptr)
+{
+	t_all_data *data = (t_all_data *)data_ptr;
 
+	if (key_code == 13)        /* W */
+	{
+		data->player.y-= 10;
+		data->player.pa -= 0.1;
+		if(data->player.pa < 0)
+			data->player.pa+= 2 * M_PI;
+		data->player.pdx = cos(data->player.pa)*5;
+		data->player.pdy = sin(data->player.pa)*5;
+	}
+	else if (key_code == 1)    /* S */
+		data->player.y+=10;
+	else if (key_code == 0)    /* A */
+		data->player.x-= 10;
+	else if (key_code == 2)    /* D */
+		data->player.x+=10;
+	draw(data);
+	return (0);
+}
+
+// int 	keys_relase(int key_code,void *data_ptr)
+// {
+// 	t_all_data *data;
+
+// 	data = (t_all_data *) data_ptr;
+// 	if(key_code == 13) // up w
+// 		data->player.walk_direction = 0;
+// 	else if(key_code == 0) // left a
+// 		data->player.turn_direction = 0;
+// 	else if(key_code == 1) // s down
+// 		data->player.walk_direction = 0;
+// 	else if(key_code == 2) // rghit d
+// 		data->player.turn_direction = 0;
+// 	return(1);
+// }
+
+int	main(void)
+{
+	t_img       img;
+	t_player    player;
+	t_all_data  data;
+	int         map[10][10] = {
+		{1,1,1,1,1,1,1,1,1,1},
+		{1,1,1,1,0,1,0,1,0,1},
+		{1,0,1,0,0,1,0,1,0,1},
+		{1,0,1,0,0,1,0,1,0,1},
+		{1,0,1,0,1,1,0,1,0,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,1,0,0,0,0,0,0,0,1},
+		{1,0,1,1,0,1,0,1,0,1},
+		{1,0,0,1,0,1,0,1,0,1},
+		{1,1,1,1,1,1,1,1,1,1}
+	};
+
+	data.mlx     = mlx_init();
+	data.mlx_win = mlx_new_window(data.mlx, 10 * 32, 10 * 32, "raycasting");
+
+	img.img = mlx_new_image(data.mlx, 10 * 32, 10 * 32);
+	img.addr = mlx_get_data_addr(img.img,&img.bits_per_pixel,
+	&img.line_length, &img.endian);
+	data.img = img;
+	player_inite(&player);
+	data.player = player;
+	memcpy(data.map, map, sizeof(map));
+	mlx_key_hook(data.mlx_win,keys_press,&data);
+	draw(&data);
+	mlx_loop(data.mlx);
+	return (0);
 }
