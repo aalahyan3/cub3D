@@ -6,9 +6,10 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/12 13:57:14 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/12 14:23:55 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "raycasting.h"
 typedef struct s_point
@@ -25,26 +26,6 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	    + (y * data->line_length
 	    +  x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
-}
-
-
-void	rander_player(t_player *player, t_img *data)
-{
-	int	i, j;
-	int	px = player->x - 3;
-	int	py = player->y - 3;
-
-	i = 0;
-	while (i < 6)
-	{
-		j = 0;
-		while (j < 6)
-		{
-			my_mlx_pixel_put(data, px + j, py + i, 0xFF000);
-			j++;
-		}
-		i++;
-	}
 }
 
 void draw_line(int x0, int y0, int x1, int y1, t_img *img, int color)
@@ -74,6 +55,27 @@ void draw_line(int x0, int y0, int x1, int y1, t_img *img, int color)
 		}
 	}
 }
+void	rander_player(t_player *player, t_img *data)
+{
+	int	i, j;
+	int	px = player->x - 3;
+	int	py = player->y - 3;
+
+	i = 0;
+	while (i < 6)
+	{
+		j = 0;
+		while (j < 6)
+		{
+			my_mlx_pixel_put(data, px + j, py + i, 0xFF000);
+			j++;
+		}
+		i++;
+	}
+	draw_line(player->x,player->y,player->x + player->pdx * 4 ,player->y + player->pdy * 4,data,0xff0000);
+}
+
+
 
 void draw(t_all_data *data)
 {
@@ -121,47 +123,42 @@ void	player_inite(t_player *player)
 	player->y = 160;
 	player->pdx = cos(player->pa)*5 ;
 	player->pdy = sin(player->pa) * 5;
-	player->pa = player->pa;
+	player->pa = M_PI;
 }
 
 int	keys_press(int key_code, void *data_ptr)
 {
 	t_all_data *data = (t_all_data *)data_ptr;
 
-	if (key_code == 13)        /* W */
+	if (key_code == 13)
 	{
-		data->player.y-= 10;
-		data->player.pa -= 0.1;
+		data->player.y += data->player.pdy *2;
+		data->player.x += data->player.pdx * 2;
+	}
+	else if (key_code == 1)
+	{
+		data->player.y -= data->player.pdy *2;
+		data->player.x -= data->player.pdx *2;
+	}
+	else if (key_code == 0)
+	{
+		data->player.pa -= 0.4;
 		if(data->player.pa < 0)
 			data->player.pa+= 2 * M_PI;
 		data->player.pdx = cos(data->player.pa)*5;
 		data->player.pdy = sin(data->player.pa)*5;
 	}
-	else if (key_code == 1)    /* S */
-		data->player.y+=10;
-	else if (key_code == 0)    /* A */
-		data->player.x-= 10;
-	else if (key_code == 2)    /* D */
-		data->player.x+=10;
+	else if (key_code == 2)
+	{
+		data->player.pa += 0.4;
+		if(data->player.pa > 0)
+			data->player.pa-= 2 * M_PI;
+		data->player.pdx = cos(data->player.pa)*5;
+		data->player.pdy = sin(data->player.pa)*5;
+	}
 	draw(data);
 	return (0);
 }
-
-// int 	keys_relase(int key_code,void *data_ptr)
-// {
-// 	t_all_data *data;
-
-// 	data = (t_all_data *) data_ptr;
-// 	if(key_code == 13) // up w
-// 		data->player.walk_direction = 0;
-// 	else if(key_code == 0) // left a
-// 		data->player.turn_direction = 0;
-// 	else if(key_code == 1) // s down
-// 		data->player.walk_direction = 0;
-// 	else if(key_code == 2) // rghit d
-// 		data->player.turn_direction = 0;
-// 	return(1);
-// }
 
 int	main(void)
 {
