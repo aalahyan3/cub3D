@@ -6,10 +6,10 @@ CC = cc
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) raycasting.h
 	$(CC) $(FLAGS) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-%.o: %.c
+%.o: %.c raycasting.h
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
