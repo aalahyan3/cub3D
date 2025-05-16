@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/15 20:31:41 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/16 10:47:13 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ typedef struct  s_player {
 	double ray_angl;
 	double ver_distance;
 	double	hori_distance;
+	double	Wall_hit_x_h;
+	double	Wall_hit_y_h;
+	double	Wall_hit_x_v;
+	double	Wall_hit_y_v;
 	double	Wall_hit_x;
 	double	Wall_hit_y;
 	int		coulumn;
@@ -52,7 +56,8 @@ typedef struct  s_player {
 	short	down;
 	short	left;
 	short	right;
-	short	found;
+	short	found_hori;
+	short	found_ver;
 }t_rays;
  
 typedef struct s_all_data
