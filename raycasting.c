@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/21 09:31:35 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/21 11:20:32 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ int has_aw_wall(int x, int y, int map[10][10])
 void my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char *dst;
-
+	if((y < 0 || y>= win_hight) && (x <0 || x>=win_width))
+		return;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 void clear_image(t_img *img)
 {
     // zero entire buffer
+	
     memset(img->addr, 0,
            img->line_length * win_hight);
 }
@@ -177,56 +179,50 @@ void casting(t_rays *rays, t_player *player, int map[10][10])
 		rays->Wall_hit_y = rays->Wall_hit_y_h;
 	}
 }
-void init_rays(t_rays *rays, int num_rays, double player_ang)
+void init_rays(t_rays *rays, int num_rays, double player_ang, int i)
 {
 	double start_ang = normalize_angle(player_ang - FOV / 2.0);
 	double angle_step = FOV / num_rays;
-
-	for (int i = 0; i < num_rays; i++)
-	{
-		double ang = normalize_angle(start_ang + i * angle_step);
-		rays[i].ray_angl = ang;
-		rays[i].down = (ang > 0 && ang < M_PI);
-		rays[i].up = !rays[i].down;
-		rays[i].right = (ang < 0.5 * M_PI || ang > 1.5 * M_PI);
-		rays[i].left = !rays[i].right;
-		rays[i].hori_distance = 0;
-		rays[i].ver_distance = 0;
-		rays[i].Wall_hit_x_h = 0;
-		rays[i].Wall_hit_y_h = 0;
-		rays[i].Wall_hit_x_v = 0;
-		rays[i].Wall_hit_y_v = 0;
-		rays[i].Wall_hit_y = 0;
-		rays[i].Wall_hit_x = 0;
-		rays[i].found_ver = 0;
-		rays[i].found_hori = 0;
-		rays[i].rays_dis = 0;
-	}
+	double ang = normalize_angle(start_ang + angle_step * i);
+	rays->ray_angl = normalize_angle(ang);
+	rays->down = (ang > 0 && ang < M_PI);
+	rays->up = !rays->down;
+	rays->right = (ang < 0.5 * M_PI || ang > 1.5 * M_PI);
+	rays->left = !rays->right;
+	rays->hori_distance = 0;
+	rays->ver_distance = 0;
+	rays->Wall_hit_x_h = 0;
+	rays->Wall_hit_y_h = 0;
+	rays->Wall_hit_x_v = 0;
+	rays->Wall_hit_y_v = 0;
+	rays->Wall_hit_y = 0;
+	rays->Wall_hit_x = 0;
+	rays->found_ver = 0;
+	rays->found_hori = 0;
+	rays->rays_dis = 0;
 }
-void the_3d_projection(t_rays *rays, t_player *player, t_img *img)
+void the_3d_projection(t_rays ray, t_img *img, int i)
 {
     const double proj_plane = (win_width / 2.0) / tan(FOV / 2.0);
     const int    centerY    = win_hight / 2;
 
-    for (int i = 0; i < player->num_rays; i++)
-    {
-        t_rays ray = rays[i];
         // correct fish‑eye
-        double corr_dist = ray.rays_dis
-                         * cos(ray.ray_angl - player->pa);
-
+        double corr_dist = ray.rays_dis;
+        //                  * cos(ray.ray_angl - player->pa);
+		printf("look %f\n",corr_dist);
         if (corr_dist <= 0.0001)
-            continue;
-
-        int stripH = (int)((TAIL / corr_dist) * proj_plane);
-        int drawStartY = centerY - stripH / 2;
-        int drawEndY   = centerY + stripH / 2;
-        if (drawStartY < 0)         drawStartY = 0;
-        if (drawEndY   > win_hight) drawEndY   = win_hight;
-        int x = i;
-        if (x < 0 || x >= win_width)
-            continue;
-        draw_line(
+          return;
+		else
+		{
+			double stripH = (int)((TAIL / corr_dist) * proj_plane);
+        	double drawStartY = centerY - stripH / 2;
+        	double drawEndY   = centerY + stripH / 2;
+        	if (drawStartY < 0)         drawStartY = 0;
+        	if (drawEndY   > win_hight) drawEndY   = win_hight;
+        	int x = i;
+        	if (x < 0 || x >= win_width)
+           	 return;
+        	draw_line(
             x,            // x0
             drawStartY,   // y0
             x,            // x1
@@ -239,25 +235,20 @@ void the_3d_projection(t_rays *rays, t_player *player, t_img *img)
 
 void rander_ray(t_player *player, t_img *data, int map[10][10])
 {
-	t_rays *rays;
+	t_rays rays;
 
-	rays = malloc(sizeof(t_rays) * player->num_rays);
-	init_rays(rays, player->num_rays, player->pa);
 	int i = 0;
 	while (i < player->num_rays)
 	{
-
-		printf("%f\n", rays[i].ray_angl);
-		rays[i].ray_angl += FOV / player->num_rays;
-		rays[i].ray_angl = normalize_angle(rays[i].ray_angl);
-		casting(&rays[i], player, map);
-		// if (rays[i].found_ver || rays[i].found_hori)
-		// 	draw_line(player->x, player->y, rays[i].Wall_hit_x, rays[i].Wall_hit_y, data, 0xff0000);
+		init_rays(&rays, player->num_rays, player->pa,i);
+		casting(&rays, player, map);
+		the_3d_projection(rays,data,i);
+		// if (rays.found_ver || rays.found_hori)
+		// 	draw_line(player->x, player->y, rays.Wall_hit_x, rays.Wall_hit_y, data, 0xff0000);
 		// draw_line(player->x, player->y, player->x + cos(player->pa) * 30, player->y + sin(player->pa) * 30, data, 0x00fff00);
 		i++;
 	}
-	the_3d_projection(rays,player,data);
-	free(rays);
+	
 }
 void rander_player(t_player *player, t_img *data, int map[10][10])
 {
@@ -305,10 +296,10 @@ void draw(t_all_data *data)
 	// 			for (int xx = 0; xx < TAIL; xx++)
 	// 				my_mlx_pixel_put(&data->img, x0 + xx, y0 + yy, color);
 	// 		}
-	// 		draw_line(x0, y0, x0 + 31, y0, &data->img, border);
-	// 		draw_line(x0 + 31, y0, x0 + 31, y0 + 31, &data->img, border);
-	// 		draw_line(x0 + 31, y0 + 31, x0, y0 + 31, &data->img, border);
-	// 		draw_line(x0, y0 + 31, x0, y0, &data->img, border);
+	// 		draw_line(x0, y0, x0 + 63, y0, &data->img, border);
+	// 		draw_line(x0 + 63, y0, x0 + 63, y0 + 63, &data->img, border);
+	// 		draw_line(x0 + 63, y0 + 63, x0, y0 + 63, &data->img, border);
+	// 		draw_line(x0, y0 + 63, x0, y0, &data->img, border);
 
 	// 		j++;
 	// 	}
@@ -324,7 +315,7 @@ void player_inite(t_player *player)
 	player->x = win_width / 2;
 	player->y = win_hight / 2;
 	player->pa = 0.0;
-	player->speed = 5.0;
+	player->speed = 3.0;
 	player->pdx = cos(player->pa) * player->speed;
 	player->pdy = sin(player->pa) * player->speed;
 	player->num_rays = win_width / wall_strip;
@@ -422,14 +413,14 @@ int main(void)
 	t_all_data data;
 	int map[10][10] = {
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		{1, 1, 1, 1, 0, 1, 0, 1, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 1, 0, 0, 1, 0, 1, 0, 1},
 		{1, 0, 1, 0, 0, 1, 0, 1, 0, 1},
 		{1, 0, 1, 0, 1, 1, 0, 1, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 1, 1, 0, 1, 0, 1, 0, 1},
-		{1, 0, 0, 1, 0, 1, 0, 1, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
 	data.mlx = mlx_init();
