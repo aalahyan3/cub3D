@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/16 10:47:13 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:50:39 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,13 @@
 #include <string.h>
 #define wall_strip 1
 #define FOV 60 * (M_PI /180)
-#define TAIL 32
-#define win_width 320
-#define win_hight 320
+#define TAIL 64
+#define win_width 640
+#define win_hight 640
+#define win_map_w 640
+#define win_map_h 640
+#define BUFFER_SIZE (img->line_length * win_hight)
+
 typedef struct	s_img {
 	void	*img;
 	char	*addr;
@@ -51,6 +55,7 @@ typedef struct  s_player {
 	double	Wall_hit_y_v;
 	double	Wall_hit_x;
 	double	Wall_hit_y;
+	double rays_dis;
 	int		coulumn;
 	short	up;
 	short	down;
@@ -60,9 +65,20 @@ typedef struct  s_player {
 	short	found_ver;
 }t_rays;
  
+ typedef struct s_keys
+{
+	int w;
+	int s;
+	int a;
+	int d;
+	int left;
+	int right;
+}	t_keys;
+
 typedef struct s_all_data
 {
   	struct s_img img;
+	t_keys	keys;
   	struct s_player player;
 	void				*mlx;
 	void				*mlx_win;
