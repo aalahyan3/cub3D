@@ -6,22 +6,20 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/28 18:17:04 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:45:37 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
 
-
-void draw(t_all_data *data)
+void	draw(t_all_data *data)
 {
 	clear_image(&data->img);
 	start_casting(&data->player, &data->img, data->map);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
-	
 }
 
-int main(void) 
+int main(void)
 {
 	t_img img;
 	t_player player;
@@ -42,8 +40,7 @@ int main(void)
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, 10 * TAIL, 10 * TAIL, "raycasting");
 	img.img = mlx_new_image(data.mlx, 10 * TAIL, 10 * TAIL);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-								 &img.line_length, &img.endian);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	data.img = img;
 	player_inite(&player);
 	data.player = player;

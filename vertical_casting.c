@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verticak_casting.c                                 :+:      :+:    :+:   */
+/*   vertical_casting.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:47:35 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/28 16:48:11 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:36:27 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
 
-double get_xstep(int left)
+double	get_xstep(int left)
 {
 	if (left)
-		return -TAIL;
+		return (-TAIL);
 	return (TAIL);
 }
 
-double get_ystep(double ang, int up, int down)
+double	get_ystep(double ang, int up, int down)
 {
-	double ystep;
+	double	ystep;
 
 	ystep = TAIL * tan(ang);
 	if ((ystep > 0 && up) || (ystep < 0 && down))
 		ystep = -ystep;
-	return ystep;
+	return (ystep);
 }
 
-void vertical_casting(t_rays *rays, t_player *player, int map[10][10])
+void	vertical_casting(t_rays *rays, t_player *player, int map[10][10])
 {
-	t_vcast vc;
-	double ang;
+	t_vcast	vc;
+	double	ang;
 
 	ang = rays->ray_angl;
 	vc.xint = floor(player->x / TAIL) * TAIL;
@@ -50,7 +50,7 @@ void vertical_casting(t_rays *rays, t_player *player, int map[10][10])
 			rays->Wall_hit_x_v = vc.nx;
 			rays->Wall_hit_y_v = vc.ny;
 			rays->found_ver = 1;
-			break;
+			break ;
 		}
 		vc.nx += vc.xstep;
 		vc.ny += vc.ystep;

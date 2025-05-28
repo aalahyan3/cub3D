@@ -6,17 +6,21 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:39:00 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/28 16:40:28 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:35:42 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
 
-void init_rays(t_rays *rays, int num_rays, double player_ang, int i)
+void	init_rays(t_rays *rays, int num_rays, double player_ang, int i)
 {
-	double start_ang = normalize_angle(player_ang - FOV / 2.0);
-	double angle_step = FOV / num_rays;
-	double ang = normalize_angle(start_ang + angle_step * i);
+	double	start_ang;
+	double	angle_step;
+	double	ang;
+
+	start_ang = normalize_angle(player_ang - FOV / 2.0);
+	angle_step = FOV / num_rays;
+	ang = normalize_angle(start_ang + angle_step * i);
 	rays->ray_angl = normalize_angle(ang);
 	rays->down = (ang > 0 && ang < M_PI);
 	rays->up = !rays->down;
@@ -34,7 +38,8 @@ void init_rays(t_rays *rays, int num_rays, double player_ang, int i)
 	rays->found_hori = 0;
 	rays->rays_dis = 0;
 }
-void player_inite(t_player *player)
+
+void	player_inite(t_player *player)
 {
 	player->x = win_width / 2;
 	player->y = win_hight / 2;

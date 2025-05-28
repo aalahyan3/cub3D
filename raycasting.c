@@ -6,13 +6,13 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/28 18:31:47 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:42:54 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
 
-void casting(t_rays *rays, t_player *player, int map[10][10])
+void	casting(t_rays *rays, t_player *player, int map[10][10])
 {
 	horizontal_casting(rays, player, map);
 	vertical_casting(rays, player, map);
@@ -21,11 +21,11 @@ void casting(t_rays *rays, t_player *player, int map[10][10])
 	if (!rays->found_ver)
 		rays->ver_distance = __DBL_MAX__;
 	if (rays->found_hori)
-		rays->hori_distance = distance_point(player->x, 
-			player->y, rays->Wall_hit_x_h, rays->Wall_hit_y_h);
+		rays->hori_distance = distance_point(player->x, player->y,
+				rays->Wall_hit_x_h, rays->Wall_hit_y_h);
 	if (rays->found_ver)
 		rays->ver_distance = distance_point(player->x, player->y,
-			 rays->Wall_hit_x_v, rays->Wall_hit_y_v);
+				rays->Wall_hit_x_v, rays->Wall_hit_y_v);
 	rays->rays_dis = rays->ver_distance;
 	if (rays->ver_distance < rays->hori_distance)
 	{
@@ -40,55 +40,59 @@ void casting(t_rays *rays, t_player *player, int map[10][10])
 	}
 }
 
-void draw_wall(int x, int y_start, int y_end, t_img *img)
+void	draw_wall(int x, int y_start, int y_end, t_img *img)
 {
-	int color;
-	int width;
+	int	color;
+	int	width;
+	int	w;
 
 	width = wall_strip;
 	color = 0xffffff;
 	if (x < 0 || x >= win_width)
-		return;
+		return ;
 	if (y_start < 0)
 		y_start = 0;
 	if (y_end > win_hight)
 		y_end = win_hight;
 	while (y_start < y_end)
 	{
-		for (int w = 0; w < width && x + w < win_width; w++)
+		w = 0;
+		while (w < width && x + w < win_width)
 		{
 			my_mlx_pixel_put(img, x + w, y_start, color);
+			w++;
 		}
 		y_start++;
 	}
 }
-void the_3d_projection(t_rays ray, t_img *img, int i, t_player *p)
-{
-    t_proj pr;
-    double proj_p;
-    int x;
-    float factor;
 
-    x = i * wall_strip;
-    proj_p = (win_width / 2.0) / tan(FOV / 2.0);
-    pr.corr_dist = ray.rays_dis * cos(ray.ray_angl - p->pa);
-    if (pr.corr_dist <= 0.0001 || x < 0 || x >= win_width)
-        return;
-    pr.strip_h = (TAIL / pr.corr_dist) * proj_p;
-    pr.draw_s = (win_hight / 2) - pr.strip_h / 2;
-    pr.draw_e = (win_hight / 2) + pr.strip_h / 2;
-    if (pr.draw_s < 0)
-        pr.draw_s = 0;
-    if (pr.draw_e > win_hight)
-        pr.draw_e = win_hight;
-    factor = 1.0 - (pr.corr_dist / win_hight);
-   draw_wall(x, pr.draw_s ,  pr.draw_e, img);
+void	the_3d_projection(t_rays ray, t_img *img, int i, t_player *p)
+{
+	t_proj	pr;
+	double	proj_p;
+	int		x;
+	float	factor;
+
+	x = i * wall_strip;
+	proj_p = (win_width / 2.0) / tan(FOV / 2.0);
+	pr.corr_dist = ray.rays_dis * cos(ray.ray_angl - p->pa);
+	if (pr.corr_dist <= 0.0001 || x < 0 || x >= win_width)
+		return ;
+	pr.strip_h = (TAIL / pr.corr_dist) * proj_p;
+	pr.draw_s = (win_hight / 2) - pr.strip_h / 2;
+	pr.draw_e = (win_hight / 2) + pr.strip_h / 2;
+	if (pr.draw_s < 0)
+		pr.draw_s = 0;
+	if (pr.draw_e > win_hight)
+		pr.draw_e = win_hight;
+	factor = 1.0 - (pr.corr_dist / win_hight);
+	draw_wall(x, pr.draw_s, pr.draw_e, img);
 }
 
-void start_casting(t_player *player, t_img *data, int map[10][10])
+void	start_casting(t_player *player, t_img *data, int map[10][10])
 {
-	t_rays rays;
-	int i;
+	t_rays	rays;
+	int		i;
 
 	i = 0;
 	while (i < player->num_rays)
