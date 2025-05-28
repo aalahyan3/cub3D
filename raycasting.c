@@ -5,15 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/28 16:49:16 by zkhourba         ###   ########.fr       */
+/*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
+/*   Updated: 2025/05/28 18:31:47 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
-
-
-
 
 void casting(t_rays *rays, t_player *player, int map[10][10])
 {
@@ -43,39 +40,37 @@ void casting(t_rays *rays, t_player *player, int map[10][10])
 	}
 }
 
-int shade_color(int color, float factor)
+void draw_wall(int x, int y_start, int y_end, t_img *img)
 {
-	int r = ((color >> 16) & 0xFF) * factor;
-	int g = ((color >> 8) & 0xFF) * factor;
-	int b = (color & 0xFF) * factor;
+	int color;
+	int width;
 
-	return (r << 16) | (g << 8) | b;
+	width = wall_strip;
+	color = 0xffffff;
+	if (x < 0 || x >= win_width)
+		return;
+	if (y_start < 0)
+		y_start = 0;
+	if (y_end > win_hight)
+		y_end = win_hight;
+	while (y_start < y_end)
+	{
+		for (int w = 0; w < width && x + w < win_width; w++)
+		{
+			my_mlx_pixel_put(img, x + w, y_start, color);
+		}
+		y_start++;
+	}
 }
-
-
-static void draw_wall_strip(t_wall w)
-{
-    while (w.y_start < w.y_end)
-    {
-        int widx;
-
-        widx = 0;
-        while (widx < w.width && w.x + widx < win_width)
-        {
-            my_mlx_pixel_put(w.img, w.x + widx, w.y_start, w.color);
-            widx++;
-        }
-        w.y_start++;
-    }
-}
-
 void the_3d_projection(t_rays ray, t_img *img, int i, t_player *p)
 {
     t_proj pr;
-    double proj_p = (win_width / 2.0) / tan(FOV / 2.0);
-    int x = i * wall_strip;
+    double proj_p;
+    int x;
     float factor;
 
+    x = i * wall_strip;
+    proj_p = (win_width / 2.0) / tan(FOV / 2.0);
     pr.corr_dist = ray.rays_dis * cos(ray.ray_angl - p->pa);
     if (pr.corr_dist <= 0.0001 || x < 0 || x >= win_width)
         return;
@@ -87,7 +82,7 @@ void the_3d_projection(t_rays ray, t_img *img, int i, t_player *p)
     if (pr.draw_e > win_hight)
         pr.draw_e = win_hight;
     factor = 1.0 - (pr.corr_dist / win_hight);
-    draw_wall(x, wall_strip, pr.draw_s, pr.draw_e, img, shade_color(0xffffff, factor));
+   draw_wall(x, pr.draw_s ,  pr.draw_e, img);
 }
 
 void start_casting(t_player *player, t_img *data, int map[10][10])
@@ -103,46 +98,4 @@ void start_casting(t_player *player, t_img *data, int map[10][10])
 		the_3d_projection(rays, data, i, player);
 		i++;
 	}
-}
-
-void draw(t_all_data *data)
-{
-	clear_image(&data->img);
-	start_casting(&data->player, &data->img, data->map);
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
-}
-
-int main(void)
-{
-	t_img img;
-	t_player player;
-	t_all_data data;
-
-	int map[10][10] = {
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 1, 0, 0, 1, 0, 1, 0, 1},
-		{1, 0, 1, 0, 0, 1, 0, 1, 0, 1},
-		{1, 0, 1, 0, 1, 1, 0, 1, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
-
-	data.mlx = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx, 10 * TAIL, 10 * TAIL, "raycasting");
-	img.img = mlx_new_image(data.mlx, 10 * TAIL, 10 * TAIL);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-								 &img.line_length, &img.endian);
-	data.img = img;
-	player_inite(&player);
-	data.player = player;
-	memcpy(data.map, map, sizeof(map));
-	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);
-	mlx_hook(data.mlx_win, 3, 1L << 1, key_release, &data);
-	mlx_loop_hook(data.mlx, handle_keys, &data);
-	draw(&data);
-	mlx_loop(data.mlx);
-	return (0);
 }

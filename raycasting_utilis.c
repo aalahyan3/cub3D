@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:41:55 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/28 16:42:22 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:15:56 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void clear_image(t_img *img)
 	memset(img->addr, 0,
 		   img->line_length * win_hight);
 }
-static double normalize_angle(double angle)
+double normalize_angle(double angle)
 {
 	angle = fmod(angle, 2.0 * M_PI);
 	if (angle < 0)

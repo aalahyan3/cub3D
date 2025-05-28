@@ -1,4 +1,4 @@
-SRC = raycasting.c
+SRC = main.c raycasting.c moving_and_hook.c raycasting_inite.c raycasting_utilis.c  vertical_casting.c horizontal_casting.c
 OBJ = $(SRC:.c=.o)
 NAME = cub3d
 FLAGS = -Wall -Wextra -Werror -g3

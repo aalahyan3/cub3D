@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:34:47 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/28 16:36:07 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:29:08 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int handle_keys(t_all_data *d)
 {
     double nx;
     double ny;
-
+     
     rotate_player(&d->player, d->keys);
     nx = d->player.x;
     ny = d->player.y;

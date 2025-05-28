@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/28 16:54:14 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:15:17 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,15 @@ int 	key_release(int keycode, t_all_data *data);
 int 	handle_keys(t_all_data *d);
 void 	init_rays(t_rays *rays, int num_rays, double player_ang, int i);
 void 	player_inite(t_player *player);
-double 	distance_point(double x0, double y0, double x1, double y1);
+double distance_point(double x0, double y0, double x1, double y1);
 double	normalize_angle(double angle);
 void 	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int		has_aw_wall(int x, int y, int map[10][10]);
 void	clear_image(t_img *img);
 void	horizontal_casting(t_rays *rays, t_player *player, int map[10][10]);
 void 	vertical_casting(t_rays *rays, t_player *player, int map[10][10]);
+void 	start_casting(t_player *player, t_img *data, int map[10][10]);
+void 	draw_wall_strip(t_proj pr,int x,t_img *img,int color);
+void 	draw(t_all_data *data);
+void 	casting(t_rays *rays, t_player *player, int map[10][10]);
 #endif
