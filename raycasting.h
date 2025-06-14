@@ -1,0 +1,138 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
+/*   Updated: 2025/05/28 18:39:24 by zkhourba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#ifndef RAYCASTING_H
+#define RAYCASTING_H
+
+#include <stdlib.h>
+#include <math.h>
+#include <mlx.h>
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#define wall_strip 1
+#define FOV 60 * (M_PI /180)
+#define TAIL 80
+#define win_width 800
+#define win_hight 800
+#define win_map_w 800
+#define win_map_h 800
+#define BUFFER_SIZE (img->line_length * win_hight)
+
+typedef struct	s_img {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_img;
+typedef struct s_proj
+{
+    double corr_dist;
+    double strip_h;
+    double draw_s;
+    double draw_e;
+}	t_proj;
+
+typedef struct  s_player {
+    double  x, y;
+    double  pa;
+    double  pdx, pdy;
+    double  speed;
+    int     num_rays;
+}	t_player;
+ typedef struct s_wall
+{
+    int    x;
+    int    width;
+    double y_start;
+    double y_end;
+    int    color;
+    t_img *img;
+}	t_wall;
+
+typedef struct s_vcast
+{
+    double xint;
+    double yint;
+    double xstep;
+    double ystep;
+    double nx;
+    double ny;
+}               t_vcast;
+typedef struct s_cast
+{
+    double xint;
+    double yint;
+    double xstep;
+    double ystep;
+    double nx;
+    double ny;
+}               t_cast;
+ typedef struct s_rays
+{
+	double ray_angl;
+	double ver_distance;
+	double	hori_distance;
+	double	Wall_hit_x_h;
+	double	Wall_hit_y_h;
+	double	Wall_hit_x_v;
+	double	Wall_hit_y_v;
+	double	Wall_hit_x;
+	double	Wall_hit_y;
+	double rays_dis;
+	int		coulumn;
+	short	up;
+	short	down;
+	short	left;
+	short	right;
+	short	found_hori;
+	short	found_ver;
+}	t_rays;
+
+ typedef struct s_keys
+{
+	int w;
+	int s;
+	int a;
+	int d;
+	int left;
+	int right;
+}	t_keys;
+
+typedef struct s_all_data
+{
+	struct s_img	img;
+	t_keys			keys;
+	struct s_player	player;
+	void			*mlx;
+	void			*mlx_win;
+	int				map[10][10];
+}	t_all_data;
+
+int		key_press(int keycode, t_all_data *data);
+int		key_release(int keycode, t_all_data *data);
+int		handle_keys(t_all_data *d);
+void	init_rays(t_rays *rays, int num_rays, double player_ang, int i);
+void	player_inite(t_player *player);
+double	distance_point(double x0, double y0, double x1, double y1);
+double	normalize_angle(double angle);
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+int		has_aw_wall(int x, int y, int map[10][10]);
+void	clear_image(t_img *img);
+void	horizontal_casting(t_rays *rays, t_player *player, int map[10][10]);
+void	vertical_casting(t_rays *rays, t_player *player, int map[10][10]);
+void	start_casting(t_player *player, t_img *data, int map[10][10]);
+void	draw(t_all_data *data);
+void	casting(t_rays *rays, t_player *player, int map[10][10]);
+#endif
