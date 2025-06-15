@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 14:53:43 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/14 18:56:30 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/15 14:55:07 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 typedef struct s_map
 {
     char    **arr;
-    int     seil_color;
+    int     ceil_color;
     int     floor_color;
     char    *n_path;
     char    *s_path;
@@ -39,5 +39,7 @@ typedef struct s_map
 t_map   *parse(int ac, char **av);
 void clear_map(t_map *map);
 void    fill_map_data(t_map *map, int fd);
+void free_2d_array(char **arr);
+bool	map_validation(char **map);
 
 #endif

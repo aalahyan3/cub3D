@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 15:04:44 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/14 16:38:24 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/15 17:13:28 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,13 @@ t_map   *parse(int ac, char **av)
         print_error("malloc");
     }
     fill_map_data(map, fd);
+    close(fd);
+    // for (int i = 0; map->arr[i]; i++)
+    //     ft_printf("%s\n", map->arr[i]);
+    if (!map_validation(map->arr))
+    {
+        clear_map(map);
+        exit(1);
+    }
     return (map);
 }

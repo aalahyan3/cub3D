@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 16:37:33 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/14 22:01:32 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/15 17:14:26 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool parse_color(char *color, int state)
 	int i;
 	int	colors;
 	bool	error;
-
+	
 	i = 0;
 	error = false;
 	if (state)
@@ -94,10 +94,37 @@ bool parse_color(char *color, int state)
 	if (error || colors != 2)
 	{
 		ft_putstr_fd("Error\nParse error in line: ", 2);
-		ft_putendl_fd(color, 2);
+		ft_putstr_fd(color, 2);
 		return (false);
 	}
 	return (true);
+}
+
+int	atoi_for_rgb(char *s, char *line)
+{
+	int res;
+	int	i;
+
+	res = 0;
+	i = 0;
+	if (! s || !*s)
+	{
+		ft_putstr_fd("Error\nnon valid rgb value in : ", 2);
+		ft_putstr_fd(line, 2);
+		return (-1);
+	}
+	while (ft_isdigit(s[i]))
+	{
+		res = res * 10 + (*s - '0');
+		i++;
+	}
+	if (i > 3 || res > 255)
+	{
+		ft_putstr_fd("Error\nnon valid rgb value in : ", 2);
+		ft_putstr_fd(line, 2);
+		return (-1);
+	}
+	return (res);
 }
 
 int	get_color_from_rgb(char *line)
@@ -110,53 +137,131 @@ int	get_color_from_rgb(char *line)
 	arr = ft_split(line, ',');
 	if (!arr)
 		return (-1);
-	rgb[0] = ft_atoi(arr[0]);
-	rgb[1] = ft_atoi(arr[1]);
-	rgb[2] = ft_atoi(arr[2]);
+	rgb[0] = atoi_for_rgb(arr[0], line);
+	rgb[1] = atoi_for_rgb(arr[1], line);
+	rgb[2] = atoi_for_rgb(arr[2], line);
+	if (rgb[0] < 0 || rgb[1] < 0 || rgb[2] < 0)
+		return (-1);
 	// free the array later
 	return ((rgb[0] << 16 | (rgb[1] << 8) | (rgb[2])));
 }
 
 bool    set_attribute(t_map *map, char *line, int *infos)
 {
-	if (*line == 'N')
+	if (!ft_strncmp(line, "NO ", 3))
 	{
 		if (!parse_path(line, map->n_path))
 			return (false);
 		map->n_path = ft_strdup(path_skipper(line));
 		return (true);
 	}
-	else if (*line == 'S')
+	else if (!ft_strncmp(line, "SO ", 3))
 	{
 		if (!parse_path(line, map->s_path))
 			return (false);
 		map->s_path = ft_strdup(path_skipper(line));
 		return (true);
 	}
-	else if (*line == 'W')
+	else if (!ft_strncmp(line, "WE ", 3))
 	{
 		if (!parse_path(line, map->w_path))
 			return (false);
 		map->w_path = ft_strdup(path_skipper(line));
 		return (true);
 	}
-	else if (*line == 'E')
+	else if (!ft_strncmp(line, "EA ", 3))
 	{
 		if (!parse_path(line, map->e_path))
 			return (false);
 		map->e_path = ft_strdup(path_skipper(line));
 		return (true);
 	}
-	else if (*line == 'C')
+	else if (!ft_strncmp(line, "C ", 2))
 	{
 		if (!parse_color(line, infos[CIEL_INDEX]))
 			return (false);
 		infos[CIEL_INDEX] = 1;
-		map->seil_color = get_color_from_rgb(line);
-		ft_printf("color is %d\n", map->seil_color);
-		return (true);
+		map->ceil_color = get_color_from_rgb(line);
+		return (map->ceil_color >= 0);
 	}
-	return (false);
+	else if (!ft_strncmp(line, "F ", 2))
+	{
+		if (!parse_color(line, infos[FLOOR_INDEX]))
+			return (false);
+		infos[FLOOR_INDEX] = 1;
+		map->floor_color = get_color_from_rgb(line);
+		return (map->floor_color >= 0);
+	}
+	else
+	{
+		ft_putstr_fd("Error\nunknown symbol in line: ", 2);
+		ft_putstr_fd(line, 2);
+		return (false);
+	}
+}
+
+int get_sizeof_map(char **arr)
+{
+	int i;
+
+	i = 0;
+	if (!arr)
+		return (0);
+	while (arr[i])
+		i++;
+	return (i);
+}
+
+void free_2d_array(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+	arr = NULL;
+}
+
+bool	add_line_to_map(t_map *map, char *line)
+{
+	char	**new;
+	int		size;
+	int		i;
+
+	size = get_sizeof_map(map->arr) + 2;
+	new = malloc(sizeof(char *) * size);
+	if (!new)
+		return (false);
+	i = 0;
+	while (map->arr && map->arr[i])
+	{
+		new[i] = ft_strdup(map->arr[i]);
+		i++;
+	}
+	new[i++] = ft_strtrim(line, "\n");
+	new[i] = NULL;
+	free_2d_array(map->arr);
+	map->arr = new;
+	return (true);
+}
+
+void	start_map_reading(t_map *map, char *line, int fd)
+{
+	while (line)
+	{
+		if (!add_line_to_map(map, line))
+		{
+			exit_error(map, line, fd);
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
 }
 
 void    fill_map_data(t_map *map, int fd)
@@ -172,6 +277,17 @@ void    fill_map_data(t_map *map, int fd)
 		{
 			if (!set_attribute(map, line, helper_infos))
 				exit_error(map, line, fd);
+			helper_infos[0] += 1;
+		}
+		else if (*line == '1' || *line == ' ' || *line == '0')
+		{
+			if (helper_infos[0] != 6)
+			{
+				ft_putstr_fd("Error\nthe map was found before all data provided.\n", 2);
+				exit_error(map, line, fd);
+			}
+			start_map_reading(map, line, fd);
+			break ;
 		}
 		free(line);
 		line = get_next_line(fd);
