@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 16:37:33 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/15 17:14:26 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/15 19:48:27 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	atoi_for_rgb(char *s, char *line)
 	}
 	while (ft_isdigit(s[i]))
 	{
-		res = res * 10 + (*s - '0');
+		res = res * 10 + (s[i] - '0');
 		i++;
 	}
 	if (i > 3 || res > 255)
