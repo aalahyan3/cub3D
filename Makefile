@@ -1,21 +1,34 @@
-SRC = main.c raycasting.c moving_and_hook.c raycasting_inite.c raycasting_utilis.c  vertical_casting.c horizontal_casting.c
-OBJ = $(SRC:.c=.o)
+SRC_RC = raycasting/raycasting.c raycasting/moving_and_hook.c raycasting/raycasting_inite.c raycasting/raycasting_utilis.c  raycasting/vertical_casting.c raycasting/horizontal_casting.c
+SRC_PS = parsing/parse.c parsing/clear_map.c parsing/fill_map_data.c
+SRC_ROOT = main.c
+OBJ = $(SRC_RC:.c=.o) $(SRC_PS:.c=.o) $(SRC_ROOT:.c=.o)
 NAME = cub3d
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS = #-Wall -Wextra -Werror
 CC = cc
 
-all: $(NAME)
+all: libft $(NAME)
 
-$(NAME): $(OBJ) raycasting.h
-	$(CC) $(FLAGS) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(OBJ) cub3d.h
+	$(CC) $(FLAGS) $(OBJ) -lft -Llibft -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-%.o: %.c raycasting.h
+libft:
+	make -C libft
+
+
+raycasting/%.o: raycasting/%.c raycasting/raycasting.h
 	$(CC) $(FLAGS) -c $< -o $@
-
+parsing/%.o: parsing/%.c parsing/parsing.h
+	$(CC) $(FLAGS) -c $< -o $@
+./%.o: ./%.c cub3d.h
+	$(CC) $(FLAGS) -c $< -o $@
 clean:
 	rm -f $(OBJ)
+	make clean -C  libft
 
 fclean: clean
 	rm -f $(NAME)
+	make fclean -C  libft
 
 re: fclean all
+
+.PHONY: libft clean

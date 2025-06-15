@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/28 18:39:24 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/14 16:02:12 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
+
+# include "../parsing/parsing.h"
 #define wall_strip 1
 #define FOV 60 * (M_PI /180)
 #define TAIL 80
@@ -27,7 +29,7 @@
 #define win_hight 800
 #define win_map_w 800
 #define win_map_h 800
-#define BUFFER_SIZE (img->line_length * win_hight)
+#define BUFF_SIZE (img->line_length * win_hight)
 
 typedef struct	s_img {
 	void	*img;
@@ -117,6 +119,7 @@ typedef struct s_all_data
 	struct s_player	player;
 	void			*mlx;
 	void			*mlx_win;
+	t_map			*mape;
 	int				map[10][10];
 }	t_all_data;
 
