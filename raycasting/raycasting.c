@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 16:48:16 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/16 21:05:46 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	casting(t_rays *rays, t_player *player,t_map *map)
 {
+	
 	horizontal_casting(rays, player, map);
 	vertical_casting(rays, player, map);
 	if (!rays->found_hori)
@@ -31,29 +32,52 @@ void	casting(t_rays *rays, t_player *player,t_map *map)
 	{
 		rays->Wall_hit_x = rays->Wall_hit_x_v;
 		rays->Wall_hit_y = rays->Wall_hit_y_v;
+		rays->found_hori = 0;
+		rays->found_ver = 1;
 	}
 	else
 	{
+		rays->found_hori = 1;
+		rays->found_ver = 0;
 		rays->rays_dis = rays->hori_distance;
 		rays->Wall_hit_x = rays->Wall_hit_x_h;
 		rays->Wall_hit_y = rays->Wall_hit_y_h;
 	}
 }
 
-void	draw_wall(int x, int y_start, int y_end, t_img *img)
+int get_color(t_rays *ray)
+{
+    double a = normalize_angle(ray->ray_angl);
+    if (ray->found_hori)
+    {
+        if (a > 0 && a < M_PI)
+            return (0x00FF00);
+        else
+            return (0xFF0000);
+    }
+	else
+	{
+		if (a < M_PI_2 || a > 3 * M_PI_2)
+			return (0xFFFF00);
+		else
+			return (0x0000FF); 
+	}
+}
+
+void	draw_wall(int x, int y_start, int y_end, t_img *img, t_rays *ray)
 {
 	int	color;
 	int	width;
 	int	w;
 
 	width = wall_strip;
-	color = 0xffffff;
 	if (x < 0 || x >= win_width)
 		return ;
 	if (y_start < 0)
 		y_start = 0;
 	if (y_end > win_height)
 		y_end = win_height;
+	color = get_color(ray);
 	while (y_start < y_end)
 	{
 		w = 0;
@@ -72,7 +96,7 @@ void	the_3d_projection(t_rays ray, t_img *img, int i, t_player *p)
 	double	proj_p;
 	int		x;
 	float	factor;
-
+	int color;
 	x = i * wall_strip;
 	proj_p = (win_width / 2.0) / tan(FOV / 2.0);
 	pr.corr_dist = ray.rays_dis * cos(ray.ray_angl - p->pa);
@@ -85,8 +109,8 @@ void	the_3d_projection(t_rays ray, t_img *img, int i, t_player *p)
 		pr.draw_s = 0;
 	if (pr.draw_e > win_height)
 		pr.draw_e = win_height;
-	factor = 1.0 - (pr.corr_dist / win_height);
-	draw_wall(x, pr.draw_s, pr.draw_e, img);
+	
+	draw_wall(x, pr.draw_s, pr.draw_e, img,&ray);
 }
 
 void	start_casting(t_player *player, t_img *img,t_map *map,t_all_data *data)

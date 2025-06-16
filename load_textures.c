@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 10:46:49 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/16 11:20:41 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/16 21:13:41 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,12 @@ void	load_textures(t_all_data *data)
 		free(data->mlx);
 		exit(1);
 	}
+	data->mape->n_texture.addr = mlx_get_data_addr(data->mape->n_texture.img,\
+						&data->mape->n_texture.bits_per_pixel, &data->mape->n_texture.line_length, &data->mape->n_texture.endian);
+	data->mape->s_texture.addr = mlx_get_data_addr(data->mape->s_texture.img,\
+						&data->mape->s_texture.bits_per_pixel, &data->mape->s_texture.line_length, &data->mape->s_texture.endian);
+	data->mape->w_texture.addr = mlx_get_data_addr(data->mape->w_texture.img,\
+						&data->mape->w_texture.bits_per_pixel, &data->mape->w_texture.line_length, &data->mape->w_texture.endian);
+	data->mape->e_texture.addr = mlx_get_data_addr(data->mape->e_texture.img,\
+						&data->mape->e_texture.bits_per_pixel, &data->mape->e_texture.line_length, &data->mape->e_texture.endian);
 }
