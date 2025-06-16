@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/14 15:25:30 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/16 10:49:52 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	draw(t_all_data *data)
 	start_casting(&data->player, &data->img, data->map);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
 }
+
 
 int main(int ac, char **av)
 {
@@ -39,6 +40,7 @@ int main(int ac, char **av)
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
 	data.mlx = mlx_init();
+	load_textures(&data);
 	data.mlx_win = mlx_new_window(data.mlx, 10 * TAIL, 10 * TAIL, "raycasting");
 	img.img = mlx_new_image(data.mlx, 10 * TAIL, 10 * TAIL);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);

@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 14:53:43 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/15 14:55:07 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/16 10:35:49 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@
 # define CIEL_INDEX 1
 # define FLOOR_INDEX 2
 
+typedef struct	s_img {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+    int     width;
+    int     height;
+}				t_img;
+
 typedef struct s_map
 {
     char    **arr;
@@ -34,6 +44,10 @@ typedef struct s_map
     char    *s_path;
     char    *w_path;
     char    *e_path;
+    t_img   n_texture;
+    t_img   s_texture;
+    t_img   e_texture;
+    t_img   w_texture;
 }   t_map;
 
 t_map   *parse(int ac, char **av);

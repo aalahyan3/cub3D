@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 15:08:28 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/14 16:02:21 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/16 10:47:45 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,7 @@
 # include "./raycasting/raycasting.h"
 # include "./parsing/parsing.h"
 # include "./libft/libft.h"
+
+void	load_textures(t_all_data *data);
+
 #endif
