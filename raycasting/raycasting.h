@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/14 16:02:12 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:41:28 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@
 # include "../parsing/parsing.h"
 #define wall_strip 1
 #define FOV 60 * (M_PI /180)
-#define TAIL 80
+#define TAIL 64
 #define win_width 800
-#define win_hight 800
-#define win_map_w 800
-#define win_map_h 800
-#define BUFF_SIZE (img->line_length * win_hight)
+#define win_height 800
 
 typedef struct	s_img {
 	void	*img;
@@ -92,7 +89,7 @@ typedef struct s_cast
 	double	Wall_hit_y_v;
 	double	Wall_hit_x;
 	double	Wall_hit_y;
-	double rays_dis;
+	double  rays_dis;
 	int		coulumn;
 	short	up;
 	short	down;
@@ -112,16 +109,34 @@ typedef struct s_cast
 	int right;
 }	t_keys;
 
+#define TEX_NORTH 0
+#define TEX_SOUTH 1
+#define TEX_EAST  2
+#define TEX_WEST  3
+#define NUM_TEXTURES 4
+
+// Texture structure
+typedef struct s_texture {
+    void    *img;           // MLX image pointer
+    char    *data;          // raw pixel data
+    int     width;
+    int     height;
+    int     bpp;
+    int     line_len;
+    int     endian;
+}   t_texture;
+
 typedef struct s_all_data
 {
-	struct s_img	img;
-	t_keys			keys;
-	struct s_player	player;
-	void			*mlx;
-	void			*mlx_win;
-	t_map			*mape;
-	int				map[10][10];
-}	t_all_data;
+    t_img       img;
+    t_keys      keys;
+    t_player    player;
+    void        *mlx;
+    void        *mlx_win;
+    t_map       *mape;
+    int         map[10][10];
+    t_texture   textures[NUM_TEXTURES];
+}   t_all_data;
 
 int		key_press(int keycode, t_all_data *data);
 int		key_release(int keycode, t_all_data *data);
@@ -135,7 +150,8 @@ int		has_aw_wall(int x, int y, int map[10][10]);
 void	clear_image(t_img *img);
 void	horizontal_casting(t_rays *rays, t_player *player, int map[10][10]);
 void	vertical_casting(t_rays *rays, t_player *player, int map[10][10]);
-void	start_casting(t_player *player, t_img *data, int map[10][10]);
+void	start_casting(t_player *player, t_img *img, int map[10][10],t_all_data *data);
 void	draw(t_all_data *data);
 void	casting(t_rays *rays, t_player *player, int map[10][10]);
+void draw_wall_column(t_all_data *data, t_rays *r, int x);
 #endif

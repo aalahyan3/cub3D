@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:41:55 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/28 18:43:58 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:47:23 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	has_aw_wall(int x, int y, int map[10][10])
 {
-	if ((y < 0 || y >= win_hight) || (x < 0 || x >= win_width))
+	if ((y < 0 || y >= win_height) || (x < 0 || x >= win_width))
 		return (1);
 	if (map[y / TAIL][x / TAIL] == 1)
 		return (1);
@@ -25,7 +25,7 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if ((y < 0 || y >= win_hight) || (x < 0 || x >= win_width))
+	if ((y < 0 || y >= win_height) || (x < 0 || x >= win_width))
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
@@ -33,7 +33,7 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 
 void	clear_image(t_img *img)
 {
-	memset(img->addr, 0, img->line_length * win_hight);
+	memset(img->addr, 0, img->line_length * win_height);
 }
 
 double	normalize_angle(double angle)

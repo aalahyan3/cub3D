@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/28 18:42:54 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/15 15:35:10 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	draw_wall(int x, int y_start, int y_end, t_img *img)
 		return ;
 	if (y_start < 0)
 		y_start = 0;
-	if (y_end > win_hight)
-		y_end = win_hight;
+	if (y_end > win_height)
+		y_end = win_height;
 	while (y_start < y_end)
 	{
 		w = 0;
@@ -79,17 +79,17 @@ void	the_3d_projection(t_rays ray, t_img *img, int i, t_player *p)
 	if (pr.corr_dist <= 0.0001 || x < 0 || x >= win_width)
 		return ;
 	pr.strip_h = (TAIL / pr.corr_dist) * proj_p;
-	pr.draw_s = (win_hight / 2) - pr.strip_h / 2;
-	pr.draw_e = (win_hight / 2) + pr.strip_h / 2;
+	pr.draw_s = (win_height / 2) - pr.strip_h / 2;
+	pr.draw_e = (win_height / 2) + pr.strip_h / 2;
 	if (pr.draw_s < 0)
 		pr.draw_s = 0;
-	if (pr.draw_e > win_hight)
-		pr.draw_e = win_hight;
-	factor = 1.0 - (pr.corr_dist / win_hight);
+	if (pr.draw_e > win_height)
+		pr.draw_e = win_height;
+	factor = 1.0 - (pr.corr_dist / win_height);
 	draw_wall(x, pr.draw_s, pr.draw_e, img);
 }
 
-void	start_casting(t_player *player, t_img *data, int map[10][10])
+void	start_casting(t_player *player, t_img *img, int map[10][10],t_all_data *data)
 {
 	t_rays	rays;
 	int		i;
@@ -99,7 +99,7 @@ void	start_casting(t_player *player, t_img *data, int map[10][10])
 	{
 		init_rays(&rays, player->num_rays, player->pa, i);
 		casting(&rays, player, map);
-		the_3d_projection(rays, data, i, player);
+		the_3d_projection(rays, img, i, player);
 		i++;
 	}
 }

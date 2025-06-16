@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:47:35 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/28 18:36:27 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:47:23 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	vertical_casting(t_rays *rays, t_player *player, int map[10][10])
 	vc.ystep = get_ystep(ang, rays->up, rays->down);
 	vc.nx = vc.xint;
 	vc.ny = vc.yint;
-	while (vc.nx >= 0 && vc.nx < win_width && vc.ny >= 0 && vc.ny < win_hight)
+	while (vc.nx >= 0 && vc.nx < win_width && vc.ny >= 0 && vc.ny < win_height)
 	{
 		if (has_aw_wall(vc.nx - rays->left, vc.ny, map))
 		{
