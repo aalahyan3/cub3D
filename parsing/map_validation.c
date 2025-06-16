@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:54:20 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/15 16:59:09 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:29:34 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,27 @@ bool	valid_elements(char **arr)
 				return (false);
 			}
 			if (ft_isalpha(arr[i][j]))
+			{
 				n_players++;
+				if ((arr[i][j + 1] && arr[i][j + 1] == ' ') || (j > 0 && arr[i][j - 1] == ' ') || (i > 0 && arr[i - 1][j] == ' ') || (arr[i + 1][j] && arr[i + 1][j] == ' '))
+				{
+					ft_putstr_fd("Error\nthe player must be inside the map.\n", 2);
+					return (false);
+				}
+			}
 			j++;;
 		}
 		i++;
 	}
 	if (n_players != 1)
 	{
-		ft_putendl_fd("Error\nmore than one player position present in the map", 2);
+		ft_putendl_fd("Error\none player[N, E, S, W] must be present in map", 2);
 		return (false);
 	}
 	return (true);
 }
 
-bool	surrounded_by_walls(char **map)
+bool	surrounded_by_walls(char **map, t_map *map_s)
 {
 	int	i;
 	int	j;
@@ -62,7 +69,7 @@ bool	surrounded_by_walls(char **map)
 			{
 				if (map[i][j] != ' ' && map[i][j] != '1')
 				{
-					ft_putstr_fd("Error\nthe map must be surrounded by wall\n", 2);
+					ft_putstr_fd("Error\nthe map must be surrounded by wall1\n", 2);
 					return (false);
 				}
 			}
@@ -78,6 +85,9 @@ bool	surrounded_by_walls(char **map)
 		}
 		i++;
 	}
+	map_s->map_w = j;
+	map_s->map_h = i;
+	ft_printf("initial %d %d\n", i, j);
 	return (true);
 }
 
@@ -99,7 +109,55 @@ bool map_has_newlines(char **map)
 	}
 	return (false);
 }
-bool	map_validation(char **map)
+int	get_longest_row(char **map)
+{
+	int	longest;
+	int	i;
+
+	i = 0;
+	longest = 0;
+	while (map[i])
+	{
+		if (ft_strlen(map[i]) > longest)
+			longest = ft_strlen(map[i]);
+		i++;
+	}
+	return (longest);
+}
+
+void adjust_map_structure(char **map)
+{
+	int	longest;
+	int	i;
+	char	*new;
+	int		j;
+
+	longest = get_longest_row(map);
+	i = 0;
+	while (map[i])
+	{
+		if (ft_strlen(map[i]) < longest)
+		{
+			new = malloc(sizeof(char) * (longest + 1));
+			if (!new)
+				return ;
+			j = 0;
+			while (j < ft_strlen(map[i]))
+			{
+				new[j] = map[i][j];
+				j++;
+			}
+			while (j < longest)
+				new[j++] = ' ';
+			new[j] = 0;
+			free(map[i]);
+			map[i] = new;
+		}
+		i++;
+	}
+}
+
+bool	map_validation(char **map, t_map *map_s)
 {
 	if (!valid_elements(map))
 		return (false);
@@ -108,7 +166,10 @@ bool	map_validation(char **map)
 		ft_putstr_fd("Error\nthe map rows must not be separated by newlines\n", 2);
 		return (false);
 	}
-	if (!surrounded_by_walls(map))
+	adjust_map_structure(map);
+	// for (int i = 0 ; map[i]; i++)
+	// 	ft_printf("%s\n", map[i]);
+	if (!surrounded_by_walls(map, map_s))
 		return (false);
 	return (true);
 }

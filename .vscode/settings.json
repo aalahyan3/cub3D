@@ -1,8 +1,6 @@
 {
     "files.associations": {
         "ios": "c",
-        "string.h": "c",
-        "math.h": "c",
         "parsing.h": "c"
     }
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 15:04:44 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/15 17:13:28 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:17:16 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_map   *parse(int ac, char **av)
     close(fd);
     // for (int i = 0; map->arr[i]; i++)
     //     ft_printf("%s\n", map->arr[i]);
-    if (!map_validation(map->arr))
+    if (!map_validation(map->arr, map))
     {
         clear_map(map);
         exit(1);

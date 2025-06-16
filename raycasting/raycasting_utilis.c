@@ -6,18 +6,20 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:41:55 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/15 13:47:23 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:57:29 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
 
-int	has_aw_wall(int x, int y, int map[10][10])
+int	has_aw_wall(int x, int y, t_map *map)
 {
-	if ((y < 0 || y >= win_height) || (x < 0 || x >= win_width))
+	if ((y < 0 || (y / TAIL) >= map->map_h - 1) || (x < 0 || (x / TAIL) >= map->map_w - 1))
 		return (1);
-	if (map[y / TAIL][x / TAIL] == 1)
+	if (map->arr[(y / TAIL) ][(x / TAIL)] == '1')
+	{
 		return (1);
+	}
 	return (0);
 }
 

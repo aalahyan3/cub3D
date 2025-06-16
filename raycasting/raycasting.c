@@ -6,13 +6,13 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/15 15:35:10 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:48:16 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
 
-void	casting(t_rays *rays, t_player *player, int map[10][10])
+void	casting(t_rays *rays, t_player *player,t_map *map)
 {
 	horizontal_casting(rays, player, map);
 	vertical_casting(rays, player, map);
@@ -89,7 +89,7 @@ void	the_3d_projection(t_rays ray, t_img *img, int i, t_player *p)
 	draw_wall(x, pr.draw_s, pr.draw_e, img);
 }
 
-void	start_casting(t_player *player, t_img *img, int map[10][10],t_all_data *data)
+void	start_casting(t_player *player, t_img *img,t_map *map,t_all_data *data)
 {
 	t_rays	rays;
 	int		i;

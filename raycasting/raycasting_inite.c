@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:39:00 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/15 13:47:23 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:56:00 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	init_rays(t_rays *rays, int num_rays, double player_ang, int i)
 
 void	player_inite(t_player *player)
 {
-	player->x = win_width / 2;
-	player->y = win_height / 2;
+	player->x = 200;
+	player->y = 100;
 	player->pa = 0.0;
 	player->speed = 3.0;
 	player->pdx = cos(player->pa) * player->speed;

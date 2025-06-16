@@ -1,6 +1,6 @@
 SRC_RC = raycasting/raycasting.c raycasting/moving_and_hook.c raycasting/raycasting_inite.c raycasting/raycasting_utilis.c  raycasting/vertical_casting.c raycasting/horizontal_casting.c
 SRC_PS = parsing/parse.c parsing/clear_map.c parsing/fill_map_data.c parsing/map_validation.c
-SRC_ROOT = main.c
+SRC_ROOT = main.c load_textures.c
 OBJ = $(SRC_RC:.c=.o) $(SRC_PS:.c=.o) $(SRC_ROOT:.c=.o)
 NAME = cub3d
 FLAGS = -fsanitize=address#-Wall -Wextra -Werror

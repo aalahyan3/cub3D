@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:49:39 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/15 13:47:23 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:33:30 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ double	get_step(int neg_dir)
 	return (TAIL);
 }
 
-void	horizontal_casting(t_rays *rays, t_player *player, int map[10][10])
+void	horizontal_casting(t_rays *rays, t_player *player, t_map *map)
 {
 	t_cast	c;
 	double	a;

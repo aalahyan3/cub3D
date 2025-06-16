@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 15:41:28 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:23:08 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,11 @@
 # include "../parsing/parsing.h"
 #define wall_strip 1
 #define FOV 60 * (M_PI /180)
-#define TAIL 64
+#define TAIL 80
 #define win_width 800
 #define win_height 800
 
-typedef struct	s_img {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_img;
+
 typedef struct s_proj
 {
     double corr_dist;
@@ -146,12 +140,12 @@ void	player_inite(t_player *player);
 double	distance_point(double x0, double y0, double x1, double y1);
 double	normalize_angle(double angle);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-int		has_aw_wall(int x, int y, int map[10][10]);
+int		has_aw_wall(int x, int y, t_map *map);
 void	clear_image(t_img *img);
-void	horizontal_casting(t_rays *rays, t_player *player, int map[10][10]);
-void	vertical_casting(t_rays *rays, t_player *player, int map[10][10]);
-void	start_casting(t_player *player, t_img *img, int map[10][10],t_all_data *data);
+void	horizontal_casting(t_rays *rays, t_player *player,t_map *map);
+void	vertical_casting(t_rays *rays, t_player *player, t_map *map);
+void	start_casting(t_player *player, t_img *img, t_map *map,t_all_data *data);
 void	draw(t_all_data *data);
-void	casting(t_rays *rays, t_player *player, int map[10][10]);
+void	casting(t_rays *rays, t_player *player, t_map *map);
 void draw_wall_column(t_all_data *data, t_rays *r, int x);
 #endif
