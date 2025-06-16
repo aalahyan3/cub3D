@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 17:02:49 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:05:34 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,13 @@ int main(int ac, char **av)
 	t_all_data data;
 	unsigned int *wall_textuers;
 	data.mape = parse(ac, av);
-	printf("player is in %d %d\n", data.mape->px, data.mape->py);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, 10 * TAIL, 10 * TAIL, "raycasting");
 	img.img = mlx_new_image(data.mlx, 10 * TAIL, 10 * TAIL);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	data.img = img;
 	load_textures(&data);
-	player_inite(&player);
+	player_inite(&player, data.mape->px, data.mape->py);
 	data.player = player;
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 1, key_release, &data);

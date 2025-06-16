@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_inite.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:39:00 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 16:56:00 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:05:14 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	init_rays(t_rays *rays, int num_rays, double player_ang, int i)
 	rays->rays_dis = 0;
 }
 
-void	player_inite(t_player *player)
+void	player_inite(t_player *player, int x, int y)
 {
-	player->x = 200;
-	player->y = 100;
+	player->x = x * TAIL;
+	player->y = y * TAIL;
 	player->pa = 0.0;
 	player->speed = 3.0;
 	player->pdx = cos(player->pa) * player->speed;

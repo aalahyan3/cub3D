@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 16:23:08 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:04:53 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int		key_press(int keycode, t_all_data *data);
 int		key_release(int keycode, t_all_data *data);
 int		handle_keys(t_all_data *d);
 void	init_rays(t_rays *rays, int num_rays, double player_ang, int i);
-void	player_inite(t_player *player);
+void	player_inite(t_player *player, int x, int y);
 double	distance_point(double x0, double y0, double x1, double y1);
 double	normalize_angle(double angle);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
