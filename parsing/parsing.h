@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 14:53:43 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/16 17:00:14 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:51:34 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <fcntl.h>
 # include <string.h>
 # include <errno.h>
+# include <math.h>
 # include "../libft/libft.h"
 
 # define NO_ARG "Invalid argument - usage: ./cub3d *.cub."
@@ -52,6 +53,7 @@ typedef struct s_map
     t_img   w_texture;
     int     px;
     int     py;
+    float   i_angle;
 }   t_map;
 
 t_map   *parse(int ac, char **av);
