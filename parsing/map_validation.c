@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:54:20 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/15 21:09:22 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/15 21:42:53 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,14 @@ bool	valid_elements(char **arr)
 				return (false);
 			}
 			if (ft_isalpha(arr[i][j]))
+			{
 				n_players++;
+				if ((arr[i][j + 1] && arr[i][j + 1] == ' ') || (j > 0 && arr[i][j - 1] == ' ') || (i > 0 && arr[i - 1][j] == ' ') || (arr[i + 1][j] && arr[i + 1][j] == ' '))
+				{
+					ft_putstr_fd("Error\nthe player must be inside the map.\n", 2);
+					return (false);
+				}
+			}
 			j++;;
 		}
 		i++;
@@ -62,7 +69,7 @@ bool	surrounded_by_walls(char **map)
 			{
 				if (map[i][j] != ' ' && map[i][j] != '1')
 				{
-					ft_putstr_fd("Error\nthe map must be surrounded by wall\n", 2);
+					ft_putstr_fd("Error\nthe map must be surrounded by wall1\n", 2);
 					return (false);
 				}
 			}
@@ -157,8 +164,8 @@ bool	map_validation(char **map)
 		return (false);
 	}
 	adjust_map_structure(map);
-	for (int i = 0 ; map[i]; i++)
-		ft_printf("%s\n", map[i]);
+	// for (int i = 0 ; map[i]; i++)
+	// 	ft_printf("%s\n", map[i]);
 	if (!surrounded_by_walls(map))
 		return (false);
 	return (true);

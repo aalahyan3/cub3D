@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 16:37:33 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/15 19:48:27 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/15 21:28:14 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int	atoi_for_rgb(char *s, char *line)
 {
 	int res;
 	int	i;
+	int	digits;
 
 	res = 0;
 	i = 0;
@@ -113,12 +114,16 @@ int	atoi_for_rgb(char *s, char *line)
 		ft_putstr_fd(line, 2);
 		return (-1);
 	}
+	digits = 0;
+	while (s[i] && s[i] == '0')
+		i++;
 	while (ft_isdigit(s[i]))
 	{
 		res = res * 10 + (s[i] - '0');
 		i++;
+		digits++;
 	}
-	if (i > 3 || res > 255)
+	if (digits > 3 || res > 255)
 	{
 		ft_putstr_fd("Error\nnon valid rgb value in : ", 2);
 		ft_putstr_fd(line, 2);
