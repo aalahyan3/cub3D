@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 16:37:33 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/15 21:28:14 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/16 11:20:29 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,28 +157,28 @@ bool    set_attribute(t_map *map, char *line, int *infos)
 	{
 		if (!parse_path(line, map->n_path))
 			return (false);
-		map->n_path = ft_strdup(path_skipper(line));
+		map->n_path = ft_strtrim(path_skipper(line), " \n");
 		return (true);
 	}
 	else if (!ft_strncmp(line, "SO ", 3))
 	{
 		if (!parse_path(line, map->s_path))
 			return (false);
-		map->s_path = ft_strdup(path_skipper(line));
+		map->s_path = ft_strtrim(path_skipper(line), " \n");
 		return (true);
 	}
 	else if (!ft_strncmp(line, "WE ", 3))
 	{
 		if (!parse_path(line, map->w_path))
 			return (false);
-		map->w_path = ft_strdup(path_skipper(line));
+		map->w_path = ft_strtrim(path_skipper(line), " \n");
 		return (true);
 	}
 	else if (!ft_strncmp(line, "EA ", 3))
 	{
 		if (!parse_path(line, map->e_path))
 			return (false);
-		map->e_path = ft_strdup(path_skipper(line));
+		map->e_path = ft_strtrim(path_skipper(line), " \n");
 		return (true);
 	}
 	else if (!ft_strncmp(line, "C ", 2))
