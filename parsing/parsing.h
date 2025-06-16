@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 14:53:43 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/16 16:17:53 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:00:14 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_map
     t_img   s_texture;
     t_img   e_texture;
     t_img   w_texture;
+    int     px;
+    int     py;
 }   t_map;
 
 t_map   *parse(int ac, char **av);

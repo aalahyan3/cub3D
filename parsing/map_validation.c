@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:54:20 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/16 16:29:34 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:01:59 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,11 @@ bool	surrounded_by_walls(char **map, t_map *map_s)
 					ft_putstr_fd("Error\nthe map must be surrounded by wall\n", 2);
 					return (false);
 				}
+			}
+			if (ft_isalpha(map[i][j]))
+			{
+				map_s->px = j;
+				map_s->py = i;
 			}
 			j++;
 		}
