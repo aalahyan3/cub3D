@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 17:04:53 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:56:02 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include <string.h>
 
 # include "../parsing/parsing.h"
-#define wall_strip 1
+#define wall_strip 5
 #define FOV 60 * (M_PI /180)
 #define TAIL 80
 #define win_width 800
