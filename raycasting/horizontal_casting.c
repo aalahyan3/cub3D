@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:49:39 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 16:33:30 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:22:26 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	horizontal_casting(t_rays *rays, t_player *player, t_map *map)
 	c.xstep = fix_sign(TAIL / tan(a), rays->left, rays->right);
 	c.nx = c.xint;
 	c.ny = c.yint;
-	while (c.nx >= 0 && c.nx < win_width && c.ny >= 0 && c.ny < win_height)
+	while (c.nx >= 0 && c.ny >= 0 && c.nx / TAIL < map->map_w && c.ny / TAIL < map->map_h)
 	{
-		if (has_aw_wall(c.nx, c.ny - rays->up, map))
+		if (has_aw_wall((int) c.nx, (int) c.ny - rays->up, map))
 		{
 			rays->Wall_hit_x_h = c.nx;
 			rays->Wall_hit_y_h = c.ny;

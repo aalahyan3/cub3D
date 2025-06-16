@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utilis.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:41:55 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 17:11:22 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:18:40 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	has_aw_wall(int x, int y, t_map *map)
 {
-	if ((y < 0 || (y / TAIL) >= map->map_h - 1) || (x < 0 || (x / TAIL) >= map->map_w - 1))
-		return (1);
-	if (map->arr[(y / TAIL) ][(x / TAIL)] == '1')
-	{
-		return (1);
-	}
-	return (0);
+	if (x < 0 || y < 0 || x / TAIL >= map->map_w || y / TAIL >= map->map_h)
+		return (1); // Treat out of bounds as wall
+
+	if (map->arr[y / TAIL][x / TAIL] == '1')
+		return (1); // Wall detected
+
+	return (0); // No wall
 }
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
