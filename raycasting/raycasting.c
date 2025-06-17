@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 21:05:46 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:01:38 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,34 +63,89 @@ int get_color(t_rays *ray)
 			return (0x0000FF); 
 	}
 }
-
-void	draw_wall(int x, int y_start, int y_end, t_img *img, t_rays *ray)
+t_img *get_wall_texture(t_all_data *data, t_rays *ray)
 {
-	int	color;
-	int	width;
-	int	w;
+    double angle = normalize_angle(ray->ray_angl);
 
-	width = wall_strip;
-	if (x < 0 || x >= win_width)
-		return ;
-	if (y_start < 0)
-		y_start = 0;
-	if (y_end > win_height)
-		y_end = win_height;
-	color = get_color(ray);
-	while (y_start < y_end)
-	{
-		w = 0;
-		while (w < width && x + w < win_width)
-		{
-			my_mlx_pixel_put(img, x + w, y_start, color);
-			w++;
-		}
-		y_start++;
-	}
+    if (ray->found_hori)
+    {
+        if (angle > 0 && angle < M_PI) 
+            return &data->mape->s_texture;
+        else                         
+            return &data->mape->n_texture;
+    }
+    else
+    {
+        if (angle < M_PI_2 || angle > 3 * M_PI_2) 
+            return &data->mape->e_texture;
+        else                                     
+            return &data->mape->w_texture;
+    }
 }
 
-void	the_3d_projection(t_rays ray, t_img *img, int i, t_player *p)
+void draw_wall(int x, int y_start, int y_end, double strip_h,
+               t_img *img, t_rays *ray, t_all_data *data)
+{
+    t_img    *tex;
+    int       tex_x, tex_y;
+    double    wall_hit;
+    int       wall_h_clamped = y_end - y_start;
+    // offset to center sampling if top was off-screen
+    double    y_offset = (strip_h - wall_h_clamped) / 2.0;
+    int       w, draw_x;
+
+    // skip entire strip if off left/right
+    if (x + wall_strip < 0 || x >= win_width)
+        return ;
+
+    // pick correct texture
+    tex = get_wall_texture(data, ray);
+
+    // fractional hit along the wall face [0..TAIL)
+    if (ray->found_hori)
+        wall_hit = fmod(ray->Wall_hit_x, TAIL);
+    else
+        wall_hit = fmod(ray->Wall_hit_y, TAIL);
+
+    // base X in texture
+    tex_x = (int)((wall_hit / TAIL) * tex->width);
+    if (tex_x < 0)               tex_x = 0;
+    else if (tex_x >= tex->width) tex_x = tex->width - 1;
+
+    // for each sub-column in this strip
+    for (w = 0; w < wall_strip; w++)
+    {
+        draw_x = x + w;
+        if (draw_x < 0 || draw_x >= win_width)
+            continue;
+
+        // draw vertical span
+        for (int y = y_start; y < y_end; y++)
+        {
+            // d runs from 0..strip_h
+            double d = (y - y_start) + y_offset;
+            tex_y = (int)((d / strip_h) * tex->height);
+
+            // clamp tex_y
+            if (tex_y < 0)               tex_y = 0;
+            else if (tex_y >= tex->height) tex_y = tex->height - 1;
+
+            // fetch pixel
+            char *p = tex->addr
+              + tex_y * tex->line_length
+              + tex_x * (tex->bits_per_pixel / 8);
+            int color = *(unsigned int *)p;
+
+            my_mlx_pixel_put(img, draw_x, y, color);
+        }
+    }
+}
+
+
+
+
+
+void	the_3d_projection(t_rays ray, t_img *img, int i, t_player *p,t_all_data *data)
 {
 	t_proj	pr;
 	double	proj_p;
@@ -110,7 +165,7 @@ void	the_3d_projection(t_rays ray, t_img *img, int i, t_player *p)
 	if (pr.draw_e > win_height)
 		pr.draw_e = win_height;
 	
-	draw_wall(x, pr.draw_s, pr.draw_e, img,&ray);
+	draw_wall(x, pr.draw_s, pr.draw_e,pr.strip_h, img,&ray,data);
 }
 
 void	start_casting(t_player *player, t_img *img,t_map *map,t_all_data *data)
@@ -123,7 +178,7 @@ void	start_casting(t_player *player, t_img *img,t_map *map,t_all_data *data)
 	{
 		init_rays(&rays, player->num_rays, player->pa, i);
 		casting(&rays, player, map);
-		the_3d_projection(rays, img, i, player);
+		the_3d_projection(rays, img, i, player,data);
 		i++;
 	}
 }

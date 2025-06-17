@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 20:08:41 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/17 14:30:12 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,7 @@ void draw(t_all_data *data)
 	start_casting(&data->player, &data->img, data->mape,data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
 }
-// static void load_one_texture(t_all_data *d, int idx, const char *path)
-// {
-//     t_texture *t = &d->textures[idx];
-//     t->img = mlx_xpm_file_to_image(d->mlx, (char *)path,
-//                                     &t->width, &t->height);
-//     if (!t->img)
-//         exit(printf("Error: Could not load texture %s\n", path));
-//     t->data = mlx_get_data_addr(t->img,
-//                                 &t->bpp,
-//                                 &t->line_len,
-//                                 &t->endian);
-// }
+
 
 int main(int ac, char **av)
 {

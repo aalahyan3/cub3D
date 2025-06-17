@@ -1,6 +1,6 @@
-NO ./textures/texture_test.xpm
-SO ./textures/texture_test.xpm
-WE ./textures/texture_test.xpm
+NO ./textures/colorstone.xpm
+SO ./textures/eagle.xpm
+WE ./textures/colorstone.xpm
 EA ./textures/texture_test.xpm
 
 F     000,000,0
@@ -8,6 +8,6 @@ C     000,000,255
 
 11111111111111111111111111
 10000000000000001000000001
-10001000100000001000000001
-100N0000000000001000000001
+10000000000000001000000001
+1000S000000000001000000001
 11111111111111111111111111
