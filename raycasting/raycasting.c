@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/17 15:01:38 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:46:28 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,13 @@ void draw_wall(int x, int y_start, int y_end, double strip_h,
     int       tex_x, tex_y;
     double    wall_hit;
     int       wall_h_clamped = y_end - y_start;
-    // offset to center sampling if top was off-screen
+  
     double    y_offset = (strip_h - wall_h_clamped) / 2.0;
     int       w, draw_x;
 
-    // skip entire strip if off left/right
     if (x + wall_strip < 0 || x >= win_width)
         return ;
 
-    // pick correct texture
     tex = get_wall_texture(data, ray);
 
     // fractional hit along the wall face [0..TAIL)
@@ -109,8 +107,10 @@ void draw_wall(int x, int y_start, int y_end, double strip_h,
 
     // base X in texture
     tex_x = (int)((wall_hit / TAIL) * tex->width);
-    if (tex_x < 0)               tex_x = 0;
-    else if (tex_x >= tex->width) tex_x = tex->width - 1;
+    if (tex_x < 0)               
+		tex_x = 0;
+    else if (tex_x >= tex->width)
+		tex_x = tex->width - 1;
 
     // for each sub-column in this strip
     for (w = 0; w < wall_strip; w++)
@@ -135,15 +135,10 @@ void draw_wall(int x, int y_start, int y_end, double strip_h,
               + tex_y * tex->line_length
               + tex_x * (tex->bits_per_pixel / 8);
             int color = *(unsigned int *)p;
-
             my_mlx_pixel_put(img, draw_x, y, color);
         }
     }
 }
-
-
-
-
 
 void	the_3d_projection(t_rays ray, t_img *img, int i, t_player *p,t_all_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 20:56:02 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:32:11 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 #include <string.h>
 
 # include "../parsing/parsing.h"
-#define wall_strip 5
-#define FOV 60 * (M_PI /180)
+#define wall_strip 1
+#define FOV 60cu     * (M_PI /180)
 #define TAIL 80
 #define win_width 800
 #define win_height 800
-
+#define RADUIS 5
 
 typedef struct s_proj
 {
@@ -147,5 +147,6 @@ void	vertical_casting(t_rays *rays, t_player *player, t_map *map);
 void	start_casting(t_player *player, t_img *img, t_map *map,t_all_data *data);
 void	draw(t_all_data *data);
 void	casting(t_rays *rays, t_player *player, t_map *map);
-void draw_wall_column(t_all_data *data, t_rays *r, int x);
+int     has_wall_with_radius(int px, int py, int radius, t_map *map);
+void    draw_wall_column(t_all_data *data, t_rays *r, int x);
 #endif

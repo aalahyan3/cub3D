@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:34:47 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 16:38:13 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:29:17 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	handle_keys(t_all_data *d)
 	nx = d->player.x;
 	ny = d->player.y;
 	move_player(d, &nx, &ny);
-	if (!has_aw_wall((int)nx, (int)ny, d->mape))
+	if (!has_wall_with_radius((int)nx, (int)ny,RADUIS, d->mape))
 	{
 		d->player.x = nx;
 		d->player.y = ny;
