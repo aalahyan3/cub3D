@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moving_and_hook.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:34:47 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/16 16:38:13 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:04:24 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	handle_keys(t_all_data *d)
 		d->player.y = ny;
 	}
 	draw(d);
+	void	*image = get_minimap(d);
+	mlx_put_image_to_window(d->mlx, d->mlx_win, image, 0, 0);
 	return (0);
 }
 
