@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/17 16:10:10 by aalahyan         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/06/17 16:17:40 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 
 #ifndef RAYCASTING_H
@@ -23,7 +25,7 @@
 
 # include "../parsing/parsing.h"
 #define wall_strip 1
-#define FOV 60cu     * (M_PI /180)
+#define FOV 60     * (M_PI /180)
 #define TAIL 80
 #define win_width 800
 #define win_height 800
