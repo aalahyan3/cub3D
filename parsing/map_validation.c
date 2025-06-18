@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:54:20 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/16 20:53:44 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:37:14 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ bool	surrounded_by_walls(char **map, t_map *map_s)
 			{
 				map_s->px = j;
 				map_s->py = i;
-				if (map[i][j] == 'N')
+				if (map[i][j] == 'S')
 					map_s->i_angle = M_PI_2;
-				else if (map[i][j] == 'S')
+				else if (map[i][j] == 'N')
 					map_s->i_angle = 3 * M_PI_2;
 				else if (map[i][j] == 'W')
 					map_s->i_angle = M_PI;

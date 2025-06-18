@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moving_and_hook.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:34:47 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/17 15:29:17 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:39:48 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	rotate_player(t_player *p, t_keys k)
 {
 	if (k.left)
-		p->pa -= 0.02;
+		p->pa -= ROTATION_SPEED;
 	if (k.right)
-		p->pa += 0.02;
+		p->pa += ROTATION_SPEED;
 	if (p->pa < 0)
 		p->pa += 2 * M_PI;
 	if (p->pa > 2 * M_PI)

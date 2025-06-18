@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/17 14:30:12 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:34:46 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int main(int ac, char **av)
 	data.img = img;
 	load_textures(&data);
 	wall_textuers = malloc(sizeof(unsigned int) * win_width * win_height);
-	player_inite(&player, data.mape->px, data.mape->py);
+	player_inite(&player, data.mape->px, data.mape->py, data.mape->i_angle);
 	data.player = player;
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 1, key_release, &data);
