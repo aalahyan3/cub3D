@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:34:47 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/18 10:58:16 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:47:46 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	handle_keys(t_all_data *d)
 {
 	double	nx;
 	double	ny;
+	void	*minimap;
 
 	rotate_player(&d->player, d->keys);
 	nx = d->player.x;
@@ -68,7 +69,8 @@ int	handle_keys(t_all_data *d)
 		d->player.y = ny;
 	}
 	draw(d);
-	get_minimap(d);
+	minimap = get_minimap(d);
+	mlx_put_image_to_window(d->mlx, d->mlx_win, minimap, 0, 0);
 	return (0);
 }
 

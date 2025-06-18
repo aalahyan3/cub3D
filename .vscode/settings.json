@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "ios": "c",
-        "parsing.h": "c"
+        "parsing.h": "c",
+        "minimap.h": "c"
     }
 }
