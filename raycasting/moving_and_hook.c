@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:34:47 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/17 16:17:01 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/18 10:58:16 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	handle_keys(t_all_data *d)
 		d->player.y = ny;
 	}
 	draw(d);
+	get_minimap(d);
 	return (0);
 }
 

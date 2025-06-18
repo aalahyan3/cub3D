@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/17 16:21:27 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:28:59 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@
 #include <string.h>
 
 # include "../parsing/parsing.h"
+# include "all_data_struct.h"
+# include "../minimap/minimap.h"
 #define wall_strip 1
 #define FOV 60     * (M_PI /180)
 #define TAIL 80
 #define win_width 800
 #define win_height 800
-#define RADUIS 5
+#define RADUIS 3
 
 typedef struct s_proj
 {
@@ -39,13 +41,7 @@ typedef struct s_proj
     double draw_e;
 }	t_proj;
 
-typedef struct  s_player {
-    double  x, y;
-    double  pa;
-    double  pdx, pdy;
-    double  speed;
-    int     num_rays;
-}	t_player;
+
  typedef struct s_wall
 {
     int    x;
@@ -95,44 +91,15 @@ typedef struct s_cast
 	short	found_ver;
 }	t_rays;
 
- typedef struct s_keys
-{
-	int w;
-	int s;
-	int a;
-	int d;
-	int left;
-	int right;
-}	t_keys;
 
 #define TEX_NORTH 0
 #define TEX_SOUTH 1
 #define TEX_EAST  2
 #define TEX_WEST  3
-#define NUM_TEXTURES 4
 
 // Texture structure
-typedef struct s_texture {
-    void    *img;           // MLX image pointer
-    char    *data;          // raw pixel data
-    int     width;
-    int     height;
-    int     bpp;
-    int     line_len;
-    int     endian;
-}   t_texture;
 
-typedef struct s_all_data
-{
-    t_img       img;
-    t_keys      keys;
-    t_player    player;
-    void        *mlx;
-    void        *mlx_win;
-    t_map       *mape;
-    int         map[10][10];
-    t_texture   textures[NUM_TEXTURES];
-}   t_all_data;
+
 
 int		key_press(int keycode, t_all_data *data);
 int		key_release(int keycode, t_all_data *data);
