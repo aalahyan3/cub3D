@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 16:34:47 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/18 11:39:48 by aalahyan         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/06/18 16:09:24 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "raycasting.h"
 
@@ -57,6 +58,7 @@ int	handle_keys(t_all_data *d)
 {
 	double	nx;
 	double	ny;
+	void	*minimap;
 
 	rotate_player(&d->player, d->keys);
 	nx = d->player.x;
@@ -68,6 +70,8 @@ int	handle_keys(t_all_data *d)
 		d->player.y = ny;
 	}
 	draw(d);
+	minimap = get_minimap(d);
+	mlx_put_image_to_window(d->mlx, d->mlx_win, minimap, 0, 0);
 	return (0);
 }
 
