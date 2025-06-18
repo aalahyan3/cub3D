@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/17 16:17:40 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:21:27 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,4 +150,6 @@ void	start_casting(t_player *player, t_img *img, t_map *map,t_all_data *data);
 void	draw(t_all_data *data);
 void	casting(t_rays *rays, t_player *player, t_map *map);
 void draw_wall_column(t_all_data *data, t_rays *r, int x);
+int has_wall_with_radius(int px, int py, int radius, t_map *map);
+
 #endif
