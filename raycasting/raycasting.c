@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/19 16:14:41 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:22:52 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ void draw_wall(int x, int y_start, int y_end, double strip_h,
         return ;
 
     tex = get_wall_texture(data, ray);
-
-    // fractional hit along the wall face [0..TILE_SIZE)
+    // fractional hit along the wall face [0..TAIL)
     if (ray->found_hori)
         wall_hit = fmod(ray->Wall_hit_x, TILE_SIZE);
     else

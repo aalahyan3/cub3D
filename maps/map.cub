@@ -1,10 +1,10 @@
-NO ./textures/texture_test.xpm
+NO ./textures/brown.xpm
 SO ./textures/texture_test.xpm
 WE ./textures/texture_test.xpm
 EA ./textures/texture_test.xpm
 
 F     000,000,0
-C     000,000,255
+C     49,82,135
 
  1111111        111111111
 110000011      10000000001

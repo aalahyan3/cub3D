@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/19 16:17:58 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:21:26 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,52 @@ void	move_player(t_all_data *d, double *nx, double *ny)
 	}
 }
 
+
 int	handle_keys(t_all_data *d)
 {
 	double	nx;
 	double	ny;
 	void	*minimap;
-
+	void	*frame;
+	static int	frame_delta[2] = {0, 10};
+	static int	increaments[2] = {1, 1};
+	static int	frame_stop = 0;
+	mlx_clear_window(d->mlx, d->mlx_win);
 	rotate_player(&d->player, d->keys);
 	nx = d->player.x;
 	ny = d->player.y;
 	move_player(d, &nx, &ny);
-	if (!has_wall_with_radius((int)nx, (int)ny,RADIUS, d->mape))
+	if (!has_wall_with_radius((int)nx, (int)ny,RADUIS, d->mape))
 	{
 		d->player.x = nx;
 		d->player.y = ny;
 	}
 	draw(d);
 	minimap = get_minimap(d);
+	frame = get_animation_frame(d);
+	if (d->keys.space)
+	{
+			d->player.shot = 1;
+	}
+	if (frame_delta[0] == 10)
+		increaments[0] = -1;
+	else if (frame_delta[0] == 0)
+		increaments[0] = 1;
+	if (frame_delta[1] == 10)
+		increaments[1] = -2;
+	else if (frame_delta[1] == 0)
+		increaments[1] = 2;
+	if (frame_stop >= 5)
+	{
+		frame_delta[0] += increaments[0];
+		frame_delta[1] += increaments[1];
+		frame_stop = 0;
+	}
+	else
+		frame_stop++;
+
+	mlx_put_image_to_window(d->mlx, d->mlx_win, frame, win_width / 2 + 80 + frame_delta[0], win_height - 160 + frame_delta[0]);
+	mlx_put_image_to_window(d->mlx, d->mlx_win, d->crosshair.img, win_width / 2 - 25, win_height / 2 - 25);
 	mlx_put_image_to_window(d->mlx, d->mlx_win, minimap, 0, 0);
 	return (0);
 }
@@ -89,6 +118,8 @@ int	key_press(int keycode, t_all_data *data)
 		data->keys.left = 1;
 	if (keycode == 124)
 		data->keys.right = 1;
+	if (keycode == 49)
+		data->keys.space = 1;
 	if (keycode == 53)
 		exit(0);
 	return (0);
@@ -108,5 +139,7 @@ int	key_release(int keycode, t_all_data *data)
 		data->keys.left = 0;
 	if (keycode == 124)
 		data->keys.right = 0;
+	// if (keycode == 49)
+	// 	data->keys.right = 0;
 	return (0);
 }
