@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/17 15:46:28 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:26:38 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void draw_wall(int x, int y_start, int y_end, double strip_h,
         return ;
 
     tex = get_wall_texture(data, ray);
-
     // fractional hit along the wall face [0..TAIL)
     if (ray->found_hori)
         wall_hit = fmod(ray->Wall_hit_x, TAIL);

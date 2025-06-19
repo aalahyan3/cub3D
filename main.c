@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/18 11:34:46 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/19 14:37:05 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int main(int ac, char **av)
 	unsigned int *wall_textuers;
 	data.mape = parse(ac, av);
 	data.mlx = mlx_init();
+	data.cursor_x = 0;
+	data.cursor_y = 0;
 	data.mlx_win = mlx_new_window(data.mlx, win_width, win_height, "raycasting");
 	img.img = mlx_new_image(data.mlx, win_width, win_height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
@@ -59,8 +61,16 @@ int main(int ac, char **av)
 	wall_textuers = malloc(sizeof(unsigned int) * win_width * win_height);
 	player_inite(&player, data.mape->px, data.mape->py, data.mape->i_angle);
 	data.player = player;
+	data.keys.a = 0;
+	data.keys.s = 0;
+	data.keys.w = 0;
+	data.keys.d = 0;
+	data.keys.left = 0;
+	data.keys.right = 0;
+	data.keys.space = 0;
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 1, key_release, &data);
+	mlx_hook(data.mlx_win, 6, 1 << 6, mouse_handler, &data);
 	mlx_loop_hook(data.mlx, handle_keys, &data);
 	mlx_loop(data.mlx);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:56:54 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/18 15:50:28 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:38:32 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	fill_image(t_all_data *data, t_minimap *minimap)
 			map_x = player_tx - view + tile_x;
 			map_y = player_ty - view + tile_y;
 			if (map_x < 0 || map_x >= data->mape->map_w || map_y < 0 || map_y >= data->mape->map_h || data->mape->arr[map_y][map_x] == ' ')
-				color = 0x222222;
+				color = 0;
 			else if (data->mape->arr[map_y][map_x] == '1')
-				color = 0x000000;
+				color = 0;
 			else if (data->mape->arr[map_y][map_x] == '0' || ft_isalpha(data->mape->arr[map_y][map_x]))
 				color = 0xffffff;
 			else
@@ -97,12 +97,13 @@ void	*get_minimap(t_all_data *data)
 	t_minimap	minimap;
 	t_img		image;
 
-	minimap.view_range = 4;
-	minimap.tile_size = 20;
+	minimap.view_range = 5;
+	minimap.tile_size = 10;
 	minimap.height = minimap.view_range * minimap.tile_size * 2;
 	minimap.width = minimap.view_range * minimap.tile_size * 2;
 
 	image.img = mlx_new_image(data->mlx, minimap.width, minimap.height);
+	// exit(1);
 	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian);
 
 	image.width = minimap.width;

@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/18 16:07:42 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:45:06 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "../parsing/parsing.h"
 # include "all_data_struct.h"
 # include "../minimap/minimap.h"
+# include "../animation/animation.h"
 #define wall_strip 1
 #define FOV 60     * (M_PI /180)
 #define TAIL 80

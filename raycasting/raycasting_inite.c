@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:39:00 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/18 16:09:42 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/18 18:58:27 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,5 @@ void	player_inite(t_player *player, int x, int y, float angle)
 	player->pdx = cos(player->pa) * player->speed;
 	player->pdy = sin(player->pa) * player->speed;
 	player->num_rays = win_width / wall_strip;
+	player->shot = 0;
 }
