@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   mouse_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/14 15:08:28 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/19 14:37:24 by aalahyan         ###   ########.fr       */
+/*   Created: 2025/06/19 14:06:58 by aalahyan          #+#    #+#             */
+/*   Updated: 2025/06/19 14:47:02 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+# include "mouse_handler.h"
 
-# include "./raycasting/raycasting.h"
-# include "./parsing/parsing.h"
-# include "./libft/libft.h"
-# include "./mouse_handler/mouse_handler.h"
+int	mouse_handler(int x, int y, void *param)
+{
+	t_all_data	*data;
+	int	dx;
 
-void	load_textures(t_all_data *data);
-
-#endif
+	data = (t_all_data *)param;
+	if (data->keys.left || data->keys.right)
+		return 0;
+	dx = data->cursor_x - x;
+	// ft_printf("%d\n", dx);
+	data->player.pa -= dx * 0.005;
+	data->cursor_x = x;
+	return (0);
+}
