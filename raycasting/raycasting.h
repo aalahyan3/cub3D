@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/18 16:07:42 by aalahyan         ###   ########.fr       */
+/*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
+/*   Updated: 2025/06/19 15:44:25 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 
 #ifndef RAYCASTING_H
@@ -23,15 +22,13 @@
 #include <string.h>
 
 # include "../parsing/parsing.h"
-# include "all_data_struct.h"
-# include "../minimap/minimap.h"
-#define wall_strip 1
-#define FOV 60     * (M_PI /180)
-#define TAIL 80
-#define win_width 800
-#define win_height 800
-#define RADUIS 5
-# define ROTATION_SPEED 0.03
+#define WALL_STRIP_W1
+#define FOV 60 * (M_PI /180)
+#define TILE_SIZE 80
+#define WIN_WIDTH 800
+#define WIN_HEIGHT 800
+#define RADIUS 5
+
 typedef struct s_proj
 {
     double corr_dist;
@@ -40,7 +37,13 @@ typedef struct s_proj
     double draw_e;
 }	t_proj;
 
-
+typedef struct  s_player {
+    double  x, y;
+    double  pa;
+    double  pdx, pdy;
+    double  speed;
+    int     num_rays;
+}	t_player;
  typedef struct s_wall
 {
     int    x;
@@ -90,21 +93,50 @@ typedef struct s_cast
 	short	found_ver;
 }	t_rays;
 
+ typedef struct s_keys
+{
+	int w;
+	int s;
+	int a;
+	int d;
+	int left;
+	int right;
+}	t_keys;
 
 #define TEX_NORTH 0
 #define TEX_SOUTH 1
 #define TEX_EAST  2
 #define TEX_WEST  3
+#define NUM_TEXTURES 4
 
 // Texture structure
+typedef struct s_texture {
+    void    *img;           // MLX image pointer
+    char    *data;          // raw pixel data
+    int     width;
+    int     height;
+    int     bpp;
+    int     line_len;
+    int     endian;
+}   t_texture;
 
-
+typedef struct s_all_data
+{
+    t_img       img;
+    t_keys      keys;
+    t_player    player;
+    void        *mlx;
+    void        *mlx_win;
+    t_map       *mape;
+    int         map[10][10];
+    t_texture   textures[NUM_TEXTURES];
+}   t_all_data;
 
 int		key_press(int keycode, t_all_data *data);
 int		key_release(int keycode, t_all_data *data);
 int		handle_keys(t_all_data *d);
 void	init_rays(t_rays *rays, int num_rays, double player_ang, int i);
-void	player_inite(t_player *player, int x, int y, float angle);
+void	player_inite(t_player *player, int x, int y);
 double	distance_point(double x0, double y0, double x1, double y1);
 double	normalize_angle(double angle);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
@@ -115,7 +147,6 @@ void	vertical_casting(t_rays *rays, t_player *player, t_map *map);
 void	start_casting(t_player *player, t_img *img, t_map *map,t_all_data *data);
 void	draw(t_all_data *data);
 void	casting(t_rays *rays, t_player *player, t_map *map);
-void draw_wall_column(t_all_data *data, t_rays *r, int x);
-int has_wall_with_radius(int px, int py, int radius, t_map *map);
-
+int     has_wall_with_radius(int px, int py, int radius, t_map *map);
+void    draw_wall_column(t_all_data *data, t_rays *r, int x);
 #endif

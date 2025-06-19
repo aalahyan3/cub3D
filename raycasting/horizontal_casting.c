@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:49:39 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/17 15:26:40 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:42:00 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ double	fix_sign(double step, int dir1, int dir2)
 double	get_step(int neg_dir)
 {
 	if (neg_dir)
-		return (-TAIL);
-	return (TAIL);
+		return (-TILE_SIZE);
+	return (TILE_SIZE);
 }
 
 void	horizontal_casting(t_rays *rays, t_player *player, t_map *map)
@@ -32,15 +32,15 @@ void	horizontal_casting(t_rays *rays, t_player *player, t_map *map)
 	double	a;
 
 	a = rays->ray_angl;
-	c.yint = floor(player->y / TAIL) * TAIL;
+	c.yint = floor(player->y / TILE_SIZE) * TILE_SIZE;
 	if (rays->down)
-		c.yint += TAIL;
+		c.yint += TILE_SIZE;
 	c.xint = player->x + ((c.yint - player->y) / tan(a));
 	c.ystep = get_step(rays->up);
-	c.xstep = fix_sign(TAIL / tan(a), rays->left, rays->right);
+	c.xstep = fix_sign(TILE_SIZE / tan(a), rays->left, rays->right);
 	c.nx = c.xint;
 	c.ny = c.yint;
-	while (c.nx >= 0 && c.ny >= 0 && c.nx / TAIL < map->map_w && c.ny / TAIL < map->map_h)
+	while (c.nx >= 0 && c.ny >= 0 && c.nx / TILE_SIZE < map->map_w && c.ny / TILE_SIZE < map->map_h)
 	{
 		if (has_aw_wall((int) c.nx, (int) c.ny - rays->up, map))
 		{

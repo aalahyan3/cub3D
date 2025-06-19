@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/17 15:46:28 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:43:48 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,19 @@ void draw_wall(int x, int y_start, int y_end, double strip_h,
     double    y_offset = (strip_h - wall_h_clamped) / 2.0;
     int       w, draw_x;
 
-    if (x + wall_strip < 0 || x >= win_width)
+    if (x + WALL_STRIP_W< 0 || x >= WIN_WIDTH)
         return ;
 
     tex = get_wall_texture(data, ray);
 
-    // fractional hit along the wall face [0..TAIL)
+    // fractional hit along the wall face [0..TILE_SIZE)
     if (ray->found_hori)
-        wall_hit = fmod(ray->Wall_hit_x, TAIL);
+        wall_hit = fmod(ray->Wall_hit_x, TILE_SIZE);
     else
-        wall_hit = fmod(ray->Wall_hit_y, TAIL);
+        wall_hit = fmod(ray->Wall_hit_y, TILE_SIZE);
 
     // base X in texture
-    tex_x = (int)((wall_hit / TAIL) * tex->width);
+    tex_x = (int)((wall_hit / TILE_SIZE) * tex->width);
     if (tex_x < 0)               
 		tex_x = 0;
     else if (tex_x >= tex->width)
@@ -116,7 +116,7 @@ void draw_wall(int x, int y_start, int y_end, double strip_h,
     for (w = 0; w < wall_strip; w++)
     {
         draw_x = x + w;
-        if (draw_x < 0 || draw_x >= win_width)
+        if (draw_x < 0 || draw_x >= WIN_WIDTH)
             continue;
 
         // draw vertical span
@@ -148,17 +148,17 @@ void	the_3d_projection(t_rays ray, t_img *img, int i, t_player *p,t_all_data *da
 	float	factor;
 	int color;
 	x = i * wall_strip;
-	proj_p = (win_width / 2.0) / tan(FOV / 2.0);
+	proj_p = (WIN_WIDTH / 2.0) / tan(FOV / 2.0);
 	pr.corr_dist = ray.rays_dis * cos(ray.ray_angl - p->pa);
-	if (pr.corr_dist <= 0.0001 || x < 0 || x >= win_width)
+	if (pr.corr_dist <= 0.0001 || x < 0 || x >= WIN_WIDTH)
 		return ;
-	pr.strip_h = (TAIL / pr.corr_dist) * proj_p;
-	pr.draw_s = (win_height / 2) - pr.strip_h / 2;
-	pr.draw_e = (win_height / 2) + pr.strip_h / 2;
+	pr.strip_h = (TILE_SIZE / pr.corr_dist) * proj_p;
+	pr.draw_s = (WIN_HEIGHT / 2) - pr.strip_h / 2;
+	pr.draw_e = (WIN_HEIGHT / 2) + pr.strip_h / 2;
 	if (pr.draw_s < 0)
 		pr.draw_s = 0;
-	if (pr.draw_e > win_height)
-		pr.draw_e = win_height;
+	if (pr.draw_e > WIN_HEIGHT)
+		pr.draw_e = WIN_HEIGHT;
 	
 	draw_wall(x, pr.draw_s, pr.draw_e,pr.strip_h, img,&ray,data);
 }

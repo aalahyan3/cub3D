@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moving_and_hook.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/18 16:09:24 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:44:25 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	handle_keys(t_all_data *d)
 	nx = d->player.x;
 	ny = d->player.y;
 	move_player(d, &nx, &ny);
-	if (!has_wall_with_radius((int)nx, (int)ny,RADUIS, d->mape))
+	if (!has_wall_with_radius((int)nx, (int)ny,RADIUS, d->mape))
 	{
 		d->player.x = nx;
 		d->player.y = ny;

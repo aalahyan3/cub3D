@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:47:35 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/17 15:26:04 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:42:00 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 double	get_xstep(int left)
 {
 	if (left)
-		return (-TAIL);
-	return (TAIL);
+		return (-TILE_SIZE);
+	return (TILE_SIZE);
 }
 
 double	get_ystep(double ang, int up, int down)
 {
 	double	ystep;
 
-	ystep = TAIL * tan(ang);
+	ystep = TILE_SIZE * tan(ang);
 	if ((ystep > 0 && up) || (ystep < 0 && down))
 		ystep = -ystep;
 	return (ystep);
@@ -35,15 +35,15 @@ void	vertical_casting(t_rays *rays, t_player *player, t_map *map)
 	double	ang;
 
 	ang = rays->ray_angl;
-	vc.xint = floor(player->x / TAIL) * TAIL;
+	vc.xint = floor(player->x / TILE_SIZE) * TILE_SIZE;
 	if (rays->right)
-		vc.xint += TAIL;
+		vc.xint += TILE_SIZE;
 	vc.yint = player->y + (vc.xint - player->x) * tan(ang);
 	vc.xstep = get_xstep(rays->left);
 	vc.ystep = get_ystep(ang, rays->up, rays->down);
 	vc.nx = vc.xint;
 	vc.ny = vc.yint;
-	while (vc.nx >= 0 && vc.ny >= 0 && vc.nx / TAIL < map->map_w && vc.ny / TAIL < map->map_h)
+	while (vc.nx >= 0 && vc.ny >= 0 && vc.nx / TILE_SIZE < map->map_w && vc.ny / TILE_SIZE < map->map_h)
 	{
 		if (has_aw_wall((int )vc.nx - rays->left,(int)vc.ny, map))
 		{

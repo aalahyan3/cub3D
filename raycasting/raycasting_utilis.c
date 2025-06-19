@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:41:55 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/17 15:21:16 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:43:48 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 int	has_aw_wall(int x, int y, t_map *map)
 {
-	if (x < 0 || y < 0 || x / TAIL >= map->map_w || y / TAIL >= map->map_h)
+	if (x < 0 || y < 0 || x / TILE_SIZE >= map->map_w || y / TILE_SIZE >= map->map_h)
 		return (1); 
 
-	if (map->arr[y / TAIL][x / TAIL] == '1')
+	if (map->arr[y / TILE_SIZE][x / TILE_SIZE] == '1')
 		return (1); 
 
 	return (0);
@@ -44,7 +44,7 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if ((y < 0 || y >= win_height) || (x < 0 || x >= win_width))
+	if ((y < 0 || y >= WIN_HEIGHT) || (x < 0 || x >= WIN_WIDTH))
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
@@ -52,7 +52,7 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 
 void	clear_image(t_img *img)
 {
-	memset(img->addr, 0, img->line_length * win_height);
+	memset(img->addr, 0, img->line_length * WIN_HEIGHT);
 }
 
 double	normalize_angle(double angle)
