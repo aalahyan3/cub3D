@@ -2,6 +2,7 @@
     "files.associations": {
         "ios": "c",
         "parsing.h": "c",
-        "minimap.h": "c"
+        "minimap.h": "c",
+        "stdlib.h": "c"
     }
 }

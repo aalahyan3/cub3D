@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/19 15:43:48 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:14:41 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void draw_wall(int x, int y_start, int y_end, double strip_h,
     double    y_offset = (strip_h - wall_h_clamped) / 2.0;
     int       w, draw_x;
 
-    if (x + WALL_STRIP_W< 0 || x >= WIN_WIDTH)
+    if (x + WALL_STRIP_W < 0 || x >= WIN_WIDTH)
         return ;
 
     tex = get_wall_texture(data, ray);
@@ -113,7 +113,7 @@ void draw_wall(int x, int y_start, int y_end, double strip_h,
 		tex_x = tex->width - 1;
 
     // for each sub-column in this strip
-    for (w = 0; w < wall_strip; w++)
+    for (w = 0; w < WALL_STRIP_W; w++)
     {
         draw_x = x + w;
         if (draw_x < 0 || draw_x >= WIN_WIDTH)
@@ -147,7 +147,7 @@ void	the_3d_projection(t_rays ray, t_img *img, int i, t_player *p,t_all_data *da
 	int		x;
 	float	factor;
 	int color;
-	x = i * wall_strip;
+	x = i * WALL_STRIP_W;
 	proj_p = (WIN_WIDTH / 2.0) / tan(FOV / 2.0);
 	pr.corr_dist = ray.rays_dis * cos(ray.ray_angl - p->pa);
 	if (pr.corr_dist <= 0.0001 || x < 0 || x >= WIN_WIDTH)

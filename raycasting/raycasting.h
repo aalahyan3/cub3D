@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:10 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/19 15:44:25 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:15:35 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 #include <string.h>
 
 # include "../parsing/parsing.h"
-#define WALL_STRIP_W1
+#define WALL_STRIP_W 1
 #define FOV 60 * (M_PI /180)
 #define TILE_SIZE 80
 #define WIN_WIDTH 800
 #define WIN_HEIGHT 800
 #define RADIUS 5
-
+#define ROTATION_SPEED 0.03
 typedef struct s_proj
 {
     double corr_dist;
