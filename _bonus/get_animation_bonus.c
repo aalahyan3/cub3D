@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_animation.c                                    :+:      :+:    :+:   */
+/*   get_animation_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:30:57 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 10:47:04 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:47:24 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "animation.h"
+#include "_bonus.h"
 
 void	*get_animation_frame(t_all_data *data)
 {
@@ -25,7 +25,7 @@ void	*get_animation_frame(t_all_data *data)
 	{
 		frame_counter++;
 		show_counter = 0;
-		if (frame_counter >= 4)
+		if (frame_counter >= 3)
 		{
 			frame_counter = 0;
 			data->player.shot = 0;

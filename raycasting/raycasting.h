@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 16:17:14 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:58:11 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@
 
 #define ROTATION_SPEED 0.03
 # include "all_data_struct.h"
-# include "../minimap/minimap.h"
-# include "../animation/animation.h"
+# include "../_bonus/_bonus.h"
 
 typedef struct s_proj
 {
@@ -70,7 +69,7 @@ typedef struct s_cast
 }               t_cast;
 
 
-int		key_press(int keycode, t_all_data *data);
+int	key_press(int keycode, void *param);
 int		key_release(int keycode, t_all_data *data);
 int	handle_keys(void *param)
 ;
@@ -90,5 +89,6 @@ void	start_casting(t_player *player, t_img *img, t_map *map,t_all_data *data);
 void	draw(t_all_data *data);
 void	casting(t_rays *rays, t_player *player, t_map *map);
 int     has_wall_with_radius(int px, int py, int radius, t_map *map);
+void	cleanup(t_all_data *data);
 
 #endif

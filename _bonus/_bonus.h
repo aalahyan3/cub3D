@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_handler.h                                    :+:      :+:    :+:   */
+/*   _bonus.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 14:04:42 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/19 14:08:20 by aalahyan         ###   ########.fr       */
+/*   Created: 2025/06/18 10:56:11 by aalahyan          #+#    #+#             */
+/*   Updated: 2025/06/20 16:44:35 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MOUSE_HANDLER_H
-#define MOUSE_HANDLER_H
+#ifndef _BONUS_H
+# define _BONUS_H
 
+#include <mlx.h>
+#include "../raycasting/all_data_struct.h"
 #include "../libft/libft.h"
-# include "../raycasting/all_data_struct.h"
+typedef struct s_minimap
+{
+	t_img	*image;
+	int	width;
+	int	height;
+	int	view_range;
+	int	tile_size;
+}	t_minimap;
 
+void	*get_minimap(t_all_data *data);
+void *get_animation_frame(t_all_data *data);
 int	mouse_handler(int x, int y, void *param);
+
 
 #endif

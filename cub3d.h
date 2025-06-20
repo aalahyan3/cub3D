@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 15:08:28 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/19 14:37:24 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:48:22 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "./raycasting/raycasting.h"
 # include "./parsing/parsing.h"
 # include "./libft/libft.h"
-# include "./mouse_handler/mouse_handler.h"
 
 void	load_textures(t_all_data *data);
 

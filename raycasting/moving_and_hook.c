@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 16:09:39 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:56:12 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,14 @@ int	handle_keys(void *param)
 	mlx_put_image_to_window(d->mlx, d->mlx_win, frame, WIN_WIDTH / 2 + 80 + frame_delta[0], WIN_HEIGHT - 160 + frame_delta[0]);
 	mlx_put_image_to_window(d->mlx, d->mlx_win, d->crosshair.img, WIN_WIDTH / 2 - 25, WIN_HEIGHT / 2 - 25);
 	mlx_put_image_to_window(d->mlx, d->mlx_win, minimap, 0, 0);
+	mlx_destroy_image(d->mlx, minimap);
 	return (0);
 }
 
-int	key_press(int keycode, t_all_data *data)
+int	key_press(int keycode, void *param)
 {
+
+	t_all_data *data = (t_all_data *)param;
 	if (keycode == 13)
 		data->keys.w = 1;
 	if (keycode == 1)
@@ -127,7 +130,7 @@ int	key_press(int keycode, t_all_data *data)
 	if (keycode == 126)
 		data->keys.up = 1;
 	if (keycode == 53)
-		exit(0);
+		cleanup(data);
 	return (0);
 }
 
