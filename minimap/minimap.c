@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:56:54 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 16:02:59 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:20:20 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	fill_image(t_all_data *data, t_minimap *minimap)
 		}
 		y++;
 	}
-	draw_circle(minimap, minimap->width / 2, minimap->height / 2, 3, 0xff0000);
+	draw_circle(minimap, minimap->width / 2, minimap->height / 2,20/data->minimap_scale , 0xff0000);
 }
 
 
@@ -95,6 +95,13 @@ void	*get_minimap(t_all_data *data)
 	t_minimap	minimap;
 	t_img		image;
 
+
+	if (data->keys.up && data->minimap_scale < 20)
+			data->minimap_scale++;
+	if (data->keys.down && data->minimap_scale > 5)
+		data->minimap_scale--;
+	data->keys.up = 0;
+	data->keys.down = 0;
 	minimap.view_range = 8;
 	minimap.tile_size = 10;
 	minimap.height = minimap.view_range * minimap.tile_size * 2;

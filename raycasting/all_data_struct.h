@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:50:07 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 16:07:07 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:17:22 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #define WIN_WIDTH 1000
 #define WIN_HEIGHT 800
 #define TILE_SIZE 80
-
+#define RADIUS 5
  typedef struct s_rays
 {
 	double ray_angl;
@@ -48,6 +48,8 @@
 	int left;
 	int right;
     int space;
+    int up;
+    int down;
 }	t_keys;
 
 typedef struct s_texture {

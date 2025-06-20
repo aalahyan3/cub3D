@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 16:02:52 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:09:39 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,10 @@ int	key_press(int keycode, t_all_data *data)
 		data->keys.right = 1;
 	if (keycode == 49)
 		data->keys.space = 1;
+	if (keycode == 125)
+		data->keys.down = 1;
+	if (keycode == 126)
+		data->keys.up = 1;
 	if (keycode == 53)
 		exit(0);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 16:01:48 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:17:14 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #define WALL_STRIP_W 1
 #define FOV 60 * (M_PI /180)
 
-#define RADIUS 5
+
 #define ROTATION_SPEED 0.03
 # include "all_data_struct.h"
 # include "../minimap/minimap.h"
