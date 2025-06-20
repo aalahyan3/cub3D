@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 12:49:42 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:22:11 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #define WALL_STRIP_W 1
 #define FOV 60 * (M_PI /180)
 #define TILE_SIZE 80
-#define WIN_WIDTH 800
+#define WIN_WIDTH 1000
 #define WIN_HEIGHT 800
 #define RADIUS 5
 #define ROTATION_SPEED 0.03

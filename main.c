@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/20 11:31:53 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:18:24 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int main(int ac, char **av)
 	t_img img;
 	t_player player;
 	t_all_data data;
-	unsigned int *wall_textuers;
 	data.mape = parse(ac, av);
 	data.mlx = mlx_init();
 	data.cursor_x =-1 ;
@@ -58,13 +57,13 @@ int main(int ac, char **av)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	data.img = img;
 	load_textures(&data);
-	wall_textuers = malloc(sizeof(unsigned int) * WIN_WIDTH * WIN_HEIGHT);
 	player_inite(&player, data.mape->px, data.mape->py, data.mape->i_angle);
 	data.player = player;
 	data.keys.a = 0;
 	data.keys.s = 0;
 	data.keys.w = 0;
 	data.keys.d = 0;
+	data.is_door = 0;
 	data.keys.left = 0;
 	data.keys.right = 0;
 	data.keys.space = 0;
