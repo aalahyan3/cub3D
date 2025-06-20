@@ -6,13 +6,13 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 17:11:19 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/15 14:54:04 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:10:35 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "parsing.h"
+#include "parsing.h"
 
-void clear_map(t_map *map)
+void	clear_map(t_map *map)
 {
 	free(map->n_path);
 	free(map->s_path);

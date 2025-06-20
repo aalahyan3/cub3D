@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 16:37:33 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/16 11:20:29 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:16:02 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,8 +271,8 @@ void	start_map_reading(t_map *map, char *line, int fd)
 
 void    fill_map_data(t_map *map, int fd)
 {
-	char    *line;
-	int     helper_infos[3]; // [nb_attr_seen, i have ciel, i have floor] default [0, 0 , 0]
+	char	*line;
+	int		helper_infos[3]; // [nb_attr_seen, i have ciel, i have floor] default [0, 0 , 0]
 
 	init_map(map, helper_infos);
 	line = get_next_line(fd);

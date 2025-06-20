@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:50:07 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 16:17:22 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:09:11 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@
     int down;
 }	t_keys;
 
-typedef struct s_texture {
-    void    *img;           // MLX image pointer
-    char    *data;          // raw pixel data
-    int     width;
-    int     height;
-    int     bpp;
-    int     line_len;
-    int     endian;
-}   t_texture;
+// typedef struct s_texture {
+//     void    *img;           // MLX image pointer
+//     char    *data;          // raw pixel data
+//     int     width;
+//     int     height;
+//     int     bpp;
+//     int     line_len;
+//     int     endian;
+// }   t_texture;
 typedef struct s_maping_tex
 {
     t_img *tex;
@@ -87,10 +87,9 @@ typedef struct s_all_data
     t_player    player;
     t_img       frames[4];
     t_img       crosshair;
-    int         is_door;
     void        *mlx;
     void        *mlx_win;
-    t_map       *mape;
+    t_map       *map;
     t_rays      *rays;
     int cursor_x;
     int cursor_y;

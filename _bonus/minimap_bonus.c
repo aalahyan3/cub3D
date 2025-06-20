@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:56:54 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 16:47:21 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:04:23 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ void	fill_image(t_all_data *data, t_minimap *minimap)
 		{
 			world_x = data->player.x - (minimap->width / 2) * data->minimap_scale + x * data->minimap_scale;
 			world_y = data->player.y - (minimap->height / 2) * data->minimap_scale + y * data->minimap_scale;
-			if (world_x / TILE_SIZE < 0 || world_x / TILE_SIZE >= data->mape->map_w || world_y / TILE_SIZE < 0 || world_y / TILE_SIZE >= data->mape->map_h || data->mape->arr[world_y / TILE_SIZE][world_x / TILE_SIZE] == ' ')
+			if (world_x / TILE_SIZE < 0 || world_x / TILE_SIZE >= data->map->map_w || world_y / TILE_SIZE < 0 || world_y / TILE_SIZE >= data->map->map_h || data->map->arr[world_y / TILE_SIZE][world_x / TILE_SIZE] == ' ')
 				color = 0x2e2e2e;
-			else if (data->mape->arr[world_y / TILE_SIZE][world_x / TILE_SIZE] == '1')
+			else if (data->map->arr[world_y / TILE_SIZE][world_x / TILE_SIZE] == '1')
 				color = 0x2e2e2e;
-			else if (data->mape->arr[world_y / TILE_SIZE][world_x / TILE_SIZE] == '0' || ft_isalpha(data->mape->arr[world_y / TILE_SIZE][world_x / TILE_SIZE]))
+			else if (data->map->arr[world_y / TILE_SIZE][world_x / TILE_SIZE] == '0' || ft_isalpha(data->map->arr[world_y / TILE_SIZE][world_x / TILE_SIZE]))
 				color = 0xf4e3c1;
 			else
 				color = 0x888888;

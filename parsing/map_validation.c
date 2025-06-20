@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:54:20 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/18 11:37:14 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:12:42 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,6 @@ bool	map_validation(char **map, t_map *map_s)
 		return (false);
 	}
 	adjust_map_structure(map);
-	// for (int i = 0 ; map[i]; i++)
-	// 	ft_printf("%s\n", map[i]);
 	if (!surrounded_by_walls(map, map_s))
 		return (false);
 	return (true);

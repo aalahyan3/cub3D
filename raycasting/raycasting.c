@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/20 15:35:28 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:09:24 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,6 @@ void draw_wall(int x, t_proj pr, t_all_data *data)
 {
 	if (x + WALL_STRIP_W < 0 || x >= WIN_WIDTH)
 		return;
-	if(data->is_door == 0)
-	{
-		
-	}
 	data->tex_data.tex = get_wall_texture(data, data->rays);
 	data->tex_data.x_offset = get_x_offset(data->rays);
 	data->tex_data.tex_x = (int)((data->tex_data.x_offset / TILE_SIZE) * data->tex_data.tex->width);

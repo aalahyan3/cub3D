@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maping_textuers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 12:46:24 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/20 12:47:41 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:04:23 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ t_img *get_wall_texture(t_all_data *data, t_rays *ray)
 	if (ray->found_hori)
 	{
 		if (angle > 0 && angle < M_PI)
-			return &data->mape->s_texture;
+			return &data->map->s_texture;
 		else
-			return &data->mape->n_texture;
+			return &data->map->n_texture;
 	}
 	else
 	{
 		if (angle < M_PI_2 || angle > 3 * M_PI_2)
-			return &data->mape->e_texture;
+			return &data->map->e_texture;
 		else
-			return &data->mape->w_texture;
+			return &data->map->w_texture;
 	}
 }
 double get_x_offset(t_rays *ray)

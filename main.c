@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/20 16:40:14 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:09:35 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	draw_floor_and_ceiling(void *img, int ceiling_color, int floor_color)
 void draw(t_all_data *data)
 {
 	clear_image(&data->img);
-	draw_floor_and_ceiling(&data->img, data->mape->ceil_color, data->mape->floor_color);
-	start_casting(&data->player, &data->img, data->mape,data);
+	draw_floor_and_ceiling(&data->img, data->map->ceil_color, data->map->floor_color);
+	start_casting(&data->player, &data->img, data->map,data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
 }
 
@@ -48,7 +48,7 @@ int main(int ac, char **av)
 	t_img img;
 	t_player player;
 	t_all_data data;
-	data.mape = parse(ac, av);
+	data.map = parse(ac, av);
 	data.mlx = mlx_init();
 	data.cursor_x =-1 ;
 	data.cursor_y = 0;
@@ -57,13 +57,12 @@ int main(int ac, char **av)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	data.img = img;
 	load_textures(&data);
-	player_inite(&player, data.mape->px, data.mape->py, data.mape->i_angle);
+	player_inite(&player, data.map->px, data.map->py, data.map->i_angle);
 	data.player = player;
 	data.keys.a = 0;
 	data.keys.s = 0;
 	data.keys.w = 0;
 	data.keys.d = 0;
-	data.is_door = 0;
 	data.keys.left = 0;
 	data.keys.right = 0;
 	data.keys.space = 0;
