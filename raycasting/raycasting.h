@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/19 16:27:30 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/20 12:10:52 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,7 @@
 # include "all_data_struct.h"
 # include "../minimap/minimap.h"
 # include "../animation/animation.h"
-#define wall_strip 1
-#define FOV 60     * (M_PI /180)
-#define TAIL 80
-#define win_width 800
-#define win_height 800
-#define RADUIS 5
-# define ROTATION_SPEED 0.03
+
 typedef struct s_proj
 {
     double corr_dist;
@@ -76,54 +70,6 @@ typedef struct s_cast
     double nx;
     double ny;
 }               t_cast;
- typedef struct s_rays
-{
-	double ray_angl;
-	double ver_distance;
-	double	hori_distance;
-	double	Wall_hit_x_h;
-	double	Wall_hit_y_h;
-	double	Wall_hit_x_v;
-	double	Wall_hit_y_v;
-	double	Wall_hit_x;
-	double	Wall_hit_y;
-	double  rays_dis;
-	int		coulumn;
-	short	up;
-	short	down;
-	short	left;
-	short	right;
-	short	found_hori;
-	short	found_ver;
-}	t_rays;
-
-//  typedef struct s_keys
-// {
-// 	int w;
-// 	int s;
-// 	int a;
-// 	int d;
-// 	int left;
-// 	int right;
-// }	t_keys;
-
-#define TEX_NORTH 0
-#define TEX_SOUTH 1
-#define TEX_EAST  2
-#define TEX_WEST  3
-#define NUM_TEXTURES 4
-
-// // Texture structure
-// typedef struct s_texture {
-//     void    *img;           // MLX image pointer
-//     char    *data;          // raw pixel data
-//     int     width;
-//     int     height;
-//     int     bpp;
-//     int     line_len;
-//     int     endian;
-// }   t_texture;
-
 
 
 int		key_press(int keycode, t_all_data *data);

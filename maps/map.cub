@@ -1,4 +1,4 @@
-NO ./textures/brown.xpm
+NO ./textures/eagle.xpm
 SO ./textures/texture_test.xpm
 WE ./textures/texture_test.xpm
 EA ./textures/texture_test.xpm
@@ -19,7 +19,7 @@ C     49,82,135
    101         100000000001
    101        100000000001
   11011      100000000001
- 1000001     1000000N0001
+ 1000001     1000000N1001
 100000001     10000000001
 110000011      1000000001
  1111111        111111111

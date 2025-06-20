@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/19 16:23:10 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:31:53 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ int main(int ac, char **av)
 	unsigned int *wall_textuers;
 	data.mape = parse(ac, av);
 	data.mlx = mlx_init();
-	data.cursor_x = 0;
+	data.cursor_x =-1 ;
 	data.cursor_y = 0;
-	data.mlx_win = mlx_new_window(data.mlx, win_width, win_height, "raycasting");
-	img.img = mlx_new_image(data.mlx, win_width, win_height);
+	data.mlx_win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "raycasting");
+	img.img = mlx_new_image(data.mlx, WIN_WIDTH, WIN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	data.img = img;
 	load_textures(&data);
