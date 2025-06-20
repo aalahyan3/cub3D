@@ -5,6 +5,7 @@
         "minimap.h": "c",
         "stdlib.h": "c",
         "raycasting.h": "c",
-        "all_data_struct.h": "c"
+        "all_data_struct.h": "c",
+        "libft.h": "c"
     }
 }
