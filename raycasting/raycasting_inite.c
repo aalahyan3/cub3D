@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_inite.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:39:00 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/18 18:58:27 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:31:44 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void	init_rays(t_rays *rays, int num_rays, double player_ang, int i)
 
 void	player_inite(t_player *player, int x, int y, float angle)
 {
-	player->x = x * TAIL + RADUIS;
-	player->y = y * TAIL + RADUIS;
+	player->x = x * TILE_SIZE + RADIUS;
+	player->y = y * TILE_SIZE + RADIUS;
 	player->pa = angle;
 	player->speed = 5.0;
 	player->pdx = cos(player->pa) * player->speed;
 	player->pdy = sin(player->pa) * player->speed;
-	player->num_rays = win_width / wall_strip;
+	player->num_rays = WIN_WIDTH / WALL_STRIP_W;
 	player->shot = 0;
 }

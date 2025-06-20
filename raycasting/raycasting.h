@@ -6,10 +6,9 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 09:58:11 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:08:14 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 
 #ifndef RAYCASTING_H
@@ -23,16 +22,17 @@
 #include <string.h>
 
 # include "../parsing/parsing.h"
+#define WALL_STRIP_W 1
+#define FOV 60 * (M_PI /180)
+#define TILE_SIZE 80
+#define WIN_WIDTH 800
+#define WIN_HEIGHT 800
+#define RADIUS 5
+#define ROTATION_SPEED 0.03
 # include "all_data_struct.h"
 # include "../minimap/minimap.h"
 # include "../animation/animation.h"
-#define wall_strip 1
-#define FOV 60     * (M_PI /180)
-#define TAIL 80
-#define win_width 800
-#define win_height 800
-#define RADUIS 5
-# define ROTATION_SPEED 0.03
+
 typedef struct s_proj
 {
     double corr_dist;
@@ -70,35 +70,6 @@ typedef struct s_cast
     double nx;
     double ny;
 }               t_cast;
- typedef struct s_rays
-{
-	double ray_angl;
-	double ver_distance;
-	double	hori_distance;
-	double	Wall_hit_x_h;
-	double	Wall_hit_y_h;
-	double	Wall_hit_x_v;
-	double	Wall_hit_y_v;
-	double	Wall_hit_x;
-	double	Wall_hit_y;
-	double  rays_dis;
-	int		coulumn;
-	short	up;
-	short	down;
-	short	left;
-	short	right;
-	short	found_hori;
-	short	found_ver;
-}	t_rays;
-
-
-#define TEX_NORTH 0
-#define TEX_SOUTH 1
-#define TEX_EAST  2
-#define TEX_WEST  3
-
-// Texture structure
-
 
 
 int		key_press(int keycode, t_all_data *data);
@@ -111,12 +82,14 @@ double	normalize_angle(double angle);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int		has_aw_wall(int x, int y, t_map *map);
 void	clear_image(t_img *img);
+double  get_x_offset(t_rays *ray);
+t_img   *get_wall_texture(t_all_data *data, t_rays *ray);
 void	horizontal_casting(t_rays *rays, t_player *player,t_map *map);
 void	vertical_casting(t_rays *rays, t_player *player, t_map *map);
+void    set_distance(t_rays *rays);
 void	start_casting(t_player *player, t_img *img, t_map *map,t_all_data *data);
 void	draw(t_all_data *data);
 void	casting(t_rays *rays, t_player *player, t_map *map);
-void draw_wall_column(t_all_data *data, t_rays *r, int x);
-int has_wall_with_radius(int px, int py, int radius, t_map *map);
+int     has_wall_with_radius(int px, int py, int radius, t_map *map);
 
 #endif
