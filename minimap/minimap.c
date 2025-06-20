@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:56:54 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/19 20:06:11 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 09:27:19 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ void	*get_minimap(t_all_data *data)
 	t_minimap	minimap;
 	t_img		image;
 
-	minimap.view_range = 4;
-	minimap.tile_size = 20;
+	minimap.view_range = 8;
+	minimap.tile_size = 10;
 	minimap.height = minimap.view_range * minimap.tile_size * 2;
 	minimap.width = minimap.view_range * minimap.tile_size * 2;
 
