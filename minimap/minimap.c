@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:56:54 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 09:27:19 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:02:59 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,36 +55,27 @@ void	draw_circle(t_minimap *minimap, int cx, int cy, int radius, int color)
 		angle += 0.01;
 	}
 }
-
 void	fill_image(t_all_data *data, t_minimap *minimap)
 {
 	int		x;
 	int		y;
-	int		map_x;
-	int		map_y;
 	int		color;
-	float	world_x;
-	float	world_y;
-	float	center_x;
-	float	center_y;
+	int_least64_t	world_x;
+	int_least64_t	world_y;
 
-	center_x = data->player.x;
-	center_y = data->player.y;
 	y = 0;
 	while (y < minimap->height)
 	{
 		x = 0;
 		while (x < minimap->width)
 		{
-			world_x = center_x - (minimap->width / 2.0) * (80.0 / minimap->tile_size) + x * (80.0 / minimap->tile_size);
-			world_y = center_y - (minimap->height / 2.0) * (80.0 / minimap->tile_size) + y * (80.0 / minimap->tile_size);
-			map_x = world_x / 80;
-			map_y = world_y / 80;
-			if (map_x < 0 || map_x >= data->mape->map_w || map_y < 0 || map_y >= data->mape->map_h || data->mape->arr[map_y][map_x] == ' ')
+			world_x = data->player.x - (minimap->width / 2.0) * data->minimap_scale + x * data->minimap_scale;
+			world_y = data->player.y - (minimap->height / 2.0) * data->minimap_scale + y * data->minimap_scale;
+			if (world_x / TILE_SIZE < 0 || world_x / TILE_SIZE >= data->mape->map_w || world_y / TILE_SIZE < 0 || world_y / TILE_SIZE >= data->mape->map_h || data->mape->arr[world_y / TILE_SIZE][world_x / TILE_SIZE] == ' ')
 				color = 0x2e2e2e;
-			else if (data->mape->arr[map_y][map_x] == '1')
+			else if (data->mape->arr[world_y / TILE_SIZE][world_x / TILE_SIZE] == '1')
 				color = 0x2e2e2e;
-			else if (data->mape->arr[map_y][map_x] == '0' || ft_isalpha(data->mape->arr[map_y][map_x]))
+			else if (data->mape->arr[world_y / TILE_SIZE][world_x / TILE_SIZE] == '0' || ft_isalpha(data->mape->arr[world_y / TILE_SIZE][world_x / TILE_SIZE]))
 				color = 0xf4e3c1;
 			else
 				color = 0x888888;

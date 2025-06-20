@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moving_and_hook.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 11:31:53 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:02:52 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	move_player(t_all_data *d, double *nx, double *ny)
 }
 
 
-int	handle_keys(t_all_data *d)
+int	handle_keys(void *param)
 {
 	double	nx;
 	double	ny;
@@ -64,6 +64,8 @@ int	handle_keys(t_all_data *d)
 	static int	frame_delta[2] = {0, 10};
 	static int	increaments[2] = {1, 1};
 	static int	frame_stop = 0;
+	t_all_data	*d;
+	d = (t_all_data *)param;
 	mlx_clear_window(d->mlx, d->mlx_win);
 	rotate_player(&d->player, d->keys);
 	nx = d->player.x;

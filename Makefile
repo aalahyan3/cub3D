@@ -4,7 +4,7 @@ SRC_ROOT = main.c load_textures.c
 SRC_BONUS = minimap/minimap.c animation/get_animation.c mouse_handler/mouse_handler.c
 OBJ = $(SRC_RC:.c=.o) $(SRC_PS:.c=.o) $(SRC_ROOT:.c=.o) $(SRC_BONUS:.c=.o)
 NAME = cub3d
-FLAGS = #-fsanitize=address#-Wall -Wextra -Werror
+FLAGS = -fsanitize=address#-Wall -Wextra -Werror
 CC = cc
 
 all: libft $(NAME)

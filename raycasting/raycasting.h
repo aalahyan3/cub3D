@@ -6,11 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/06/20 15:08:14 by aalahyan         ###   ########.fr       */
-=======
-/*   Updated: 2025/06/20 15:22:11 by zkhourba         ###   ########.fr       */
->>>>>>> b41cd673dc97d8e80455b032a36c3173d934b098
+/*   Updated: 2025/06/20 16:01:48 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +24,7 @@
 # include "../parsing/parsing.h"
 #define WALL_STRIP_W 1
 #define FOV 60 * (M_PI /180)
-#define TILE_SIZE 80
-#define WIN_WIDTH 1000
-#define WIN_HEIGHT 800
+
 #define RADIUS 5
 #define ROTATION_SPEED 0.03
 # include "all_data_struct.h"
@@ -78,7 +72,8 @@ typedef struct s_cast
 
 int		key_press(int keycode, t_all_data *data);
 int		key_release(int keycode, t_all_data *data);
-int		handle_keys(t_all_data *d);
+int	handle_keys(void *param)
+;
 void	init_rays(t_rays *rays, int num_rays, double player_ang, int i);
 void	player_inite(t_player *player, int x, int y, float angle);
 double	distance_point(double x0, double y0, double x1, double y1);

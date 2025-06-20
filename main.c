@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/20 15:18:24 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:06:59 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int main(int ac, char **av)
 	data.keys.left = 0;
 	data.keys.right = 0;
 	data.keys.space = 0;
+	data.minimap_scale = 10;
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 1, key_release, &data);
 	mlx_hook(data.mlx_win, 6, 1 << 6, mouse_handler, &data);

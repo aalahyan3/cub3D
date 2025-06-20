@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_data_struct.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:50:07 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 13:25:14 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:07:07 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define ALL_DATA_STRUCT_H
 
 # include "../parsing/parsing.h"
-
-#define NUM_TEXTURES 4
+#define WIN_WIDTH 1000
+#define WIN_HEIGHT 800
+#define TILE_SIZE 80
 
  typedef struct s_rays
 {
@@ -91,6 +92,7 @@ typedef struct s_all_data
     t_rays      *rays;
     int cursor_x;
     int cursor_y;
+    int minimap_scale;
     t_maping_tex tex_data;
 }   t_all_data;
 
