@@ -3,6 +3,8 @@
         "ios": "c",
         "parsing.h": "c",
         "minimap.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "raycasting.h": "c",
+        "all_data_struct.h": "c"
     }
 }

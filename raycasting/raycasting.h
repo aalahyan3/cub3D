@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 12:10:52 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/20 12:49:42 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,11 @@ double	normalize_angle(double angle);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int		has_aw_wall(int x, int y, t_map *map);
 void	clear_image(t_img *img);
+double  get_x_offset(t_rays *ray);
+t_img   *get_wall_texture(t_all_data *data, t_rays *ray);
 void	horizontal_casting(t_rays *rays, t_player *player,t_map *map);
 void	vertical_casting(t_rays *rays, t_player *player, t_map *map);
+void    set_distance(t_rays *rays);
 void	start_casting(t_player *player, t_img *img, t_map *map,t_all_data *data);
 void	draw(t_all_data *data);
 void	casting(t_rays *rays, t_player *player, t_map *map);
