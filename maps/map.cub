@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 NO ./textures/planks.xpm
 EA ./textures/planks.xpm
 WE ./textures/planks.xpm
 SO ./textures/planks.xpm
+=======
+NO ./textures/eagle.xpm
+SO ./textures/texture_test.xpm
+WE ./textures/texture_test.xpm
+EA ./textures/3_door (1).xpm
+>>>>>>> b41cd673dc97d8e80455b032a36c3173d934b098
 
 F     000,000,0
 C     49,82,135

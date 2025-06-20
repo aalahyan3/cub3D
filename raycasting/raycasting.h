@@ -6,7 +6,11 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/06/20 15:08:14 by aalahyan         ###   ########.fr       */
+=======
+/*   Updated: 2025/06/20 15:22:11 by zkhourba         ###   ########.fr       */
+>>>>>>> b41cd673dc97d8e80455b032a36c3173d934b098
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +29,7 @@
 #define WALL_STRIP_W 1
 #define FOV 60 * (M_PI /180)
 #define TILE_SIZE 80
-#define WIN_WIDTH 800
+#define WIN_WIDTH 1000
 #define WIN_HEIGHT 800
 #define RADIUS 5
 #define ROTATION_SPEED 0.03

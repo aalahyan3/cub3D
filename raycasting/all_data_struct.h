@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:50:07 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 12:22:49 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/20 13:25:14 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_all_data
     t_player    player;
     t_img       frames[4];
     t_img       crosshair;
+    int         is_door;
     void        *mlx;
     void        *mlx_win;
     t_map       *mape;
