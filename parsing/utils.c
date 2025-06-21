@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:29:44 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 20:27:52 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:21:36 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,33 @@ void	free_2d_array(char **arr)
 	}
 	free(arr);
 	arr = NULL;
+}
+
+int	atoi_for_rgb(char *s, char *line)
+{
+	int	res;
+	int	i;
+	int	digits;
+
+	res = 0;
+	i = 0;
+	if (! s || !*s)
+		return (ft_putstr_fd("Error\nnon valid rgb value in : ", 2), \
+		ft_putstr_fd(line, 2), -1);
+	digits = 0;
+	while (s[i] && s[i] == '0')
+		i++;
+	while (ft_isdigit(s[i]))
+	{
+		res = res * 10 + (s[i] - '0');
+		i++;
+		digits++;
+	}
+	if (digits > 3 || res > 255)
+	{
+		ft_putstr_fd("Error\nnon valid rgb value in : ", 2);
+		ft_putstr_fd(line, 2);
+		return (-1);
+	}
+	return (res);
 }

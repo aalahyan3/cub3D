@@ -1,9 +1,9 @@
 NO ./textures/planks.xpm
-EA ./textures/planks.xpm
-WE ./textures/planks.xpm
+EA ./textures/planks_3.xpm
+WE ./textures/planks_3.xpm
 SO ./textures/planks.xpm
 
-F     000,000,0
+F     0,000,0
 C     49,82,135
 
  1111111        111111111

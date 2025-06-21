@@ -6,11 +6,20 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/20 17:09:35 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/20 21:47:15 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./cub3d.h"
+
+int	cross_button(void *param)
+{
+	t_all_data	*d;
+
+	d = (t_all_data *)param;
+	cleanup(d);
+	return (0);
+}
 
 void	draw_floor_and_ceiling(void *img, int ceiling_color, int floor_color)
 {
@@ -72,6 +81,7 @@ int main(int ac, char **av)
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 1, key_release, &data);
 	mlx_hook(data.mlx_win, 6, 1 << 6, mouse_handler, &data);
+	mlx_hook(data.mlx_win, 17, 0, cross_button, &data);
 	mlx_loop_hook(data.mlx, handle_keys, &data);
 	mlx_loop(data.mlx);
 	return (0);

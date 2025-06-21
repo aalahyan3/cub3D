@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 14:53:43 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 20:28:22 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:17:42 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,8 @@ void	start_map_reading(t_map *map, char *line, int fd);
 bool	set_attribute(t_map *map, char *line, int *infos);
 void	exit_error(t_map *map, char *line, int fd);
 char	*path_skipper(char *path);
+void	adjust_map_structure(char **map);
+bool	surrounded_by_walls(char **map, t_map *map_s);
+int		atoi_for_rgb(char *s, char *line);
 
 #endif

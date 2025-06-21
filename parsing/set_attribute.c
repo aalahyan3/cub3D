@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:26:31 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 20:30:31 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:21:24 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,35 +67,6 @@ attribute duplicate was found.", 2), false);
 	return (true);
 }
 
-int	atoi_for_rgb(char *s, char *line)
-{
-	int	res;
-	int	i;
-	int	digits;
-
-	res = 0;
-	i = 0;
-	if (! s || !*s)
-		return (ft_putstr_fd("Error\nnon valid rgb value in : ", 2), \
-		ft_putstr_fd(line, 2), -1);
-	digits = 0;
-	while (s[i] && s[i] == '0')
-		i++;
-	while (ft_isdigit(s[i]))
-	{
-		res = res * 10 + (s[i] - '0');
-		i++;
-		digits++;
-	}
-	if (digits > 3 || res > 255)
-	{
-		ft_putstr_fd("Error\nnon valid rgb value in : ", 2);
-		ft_putstr_fd(line, 2);
-		return (-1);
-	}
-	return (res);
-}
-
 int	get_color_from_rgb(char *line)
 {
 	int		rgb[3];
@@ -134,14 +105,12 @@ map->ceil_color = get_color_from_rgb(line), map->ceil_color >= 0);
 	{
 		if (!parse_color(line, infos[FLOOR_INDEX]))
 			return (false);
-		return (infos[FLOOR_INDEX] = 1, map->floor_color = get_color_from_rgb(line), map->floor_color >= 0);
+		return (infos[FLOOR_INDEX] = 1, \
+		map->floor_color = get_color_from_rgb(line), map->floor_color >= 0);
 	}
 	else
-	{
-		ft_putstr_fd("Error\nunknown symbol in line: ", 2);
-		ft_putstr_fd(line, 2);
-		return (false);
-	}
+		return (ft_putstr_fd("Error\nunknown symbol in line: ", 2), \
+		ft_putstr_fd(line, 2), false);
 }
 
 bool	set_attribute(t_map *map, char *line, int *infos)
