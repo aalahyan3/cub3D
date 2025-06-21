@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 17:04:23 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:01:01 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int	key_press(int keycode, void *param)
 	if (keycode == 126)
 		data->keys.up = 1;
 	if (keycode == 53)
-		cleanup(data);
+		cleanup(data, 0);
 	return (0);
 }
 

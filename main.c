@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/20 21:47:15 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:01:08 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	cross_button(void *param)
 	t_all_data	*d;
 
 	d = (t_all_data *)param;
-	cleanup(d);
+	cleanup(d, 0);
 	return (0);
 }
 
@@ -51,33 +51,50 @@ void draw(t_all_data *data)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
 }
 
-
-int main(int ac, char **av)
+void	init_data(t_all_data *data, int ac, char **av)
 {
-	t_img img;
-	t_player player;
-	t_all_data data;
-	data.map = parse(ac, av);
-	data.mlx = mlx_init();
-	data.cursor_x =-1 ;
-	data.cursor_y = 0;
-	data.mlx_win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "raycasting");
-	img.img = mlx_new_image(data.mlx, WIN_WIDTH, WIN_HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	data.img = img;
-	load_textures(&data);
-	player_inite(&player, data.map->px, data.map->py, data.map->i_angle);
-	data.player = player;
-	data.keys.a = 0;
-	data.keys.s = 0;
-	data.keys.w = 0;
-	data.keys.d = 0;
-	data.keys.left = 0;
-	data.keys.right = 0;
-	data.keys.space = 0;
-	data.keys.up = 0;
-	data.keys.down = 0;
-	data.minimap_scale = 5;
+	t_player	player;
+	t_img		image;
+
+	ft_memset(data, 0, sizeof(t_all_data));
+	data->map = parse(ac, av);
+	data->mlx = mlx_init();
+	if (!data->mlx)
+	{
+		clear_map(data->map);
+		exit(1);
+	}
+	load_textures(data);
+	data->mlx_win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	if (!data->mlx_win)
+		cleanup(data, 1);
+	image.img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!image.img)
+		cleanup(data, 1);
+	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian);
+	if (!image.addr)
+		cleanup(data ,1);
+	data->img = image;
+	player_inite(&player, data->map->px, data->map->py, data->map->i_angle);
+	data->player = player;
+	data->keys.a = 0;
+	data->keys.s = 0;
+	data->keys.w = 0;
+	data->keys.d = 0;
+	data->keys.left = 0;
+	data->keys.right = 0;
+	data->keys.space = 0;
+	data->keys.up = 0;
+	data->keys.down = 0;
+	data->minimap_scale = 5;
+}
+
+
+int	main(int ac, char **av)
+{
+	t_all_data	data;
+
+	init_data(&data, ac, av);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 1, key_release, &data);
 	mlx_hook(data.mlx_win, 6, 1 << 6, mouse_handler, &data);
