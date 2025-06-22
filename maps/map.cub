@@ -1,7 +1,7 @@
-NO ./textures/planks.xpm
-EA ./textures/planks_3.xpm
-WE ./textures/planks_3.xpm
-SO ./textures/planks.xpm
+NO ./textures/wall_1.xpm
+EA ./textures/wall_2.xpm
+WE ./textures/wall_3.xpm
+SO ./textures/wall_4.xpm
 
 F     48,25,11
 C     49,82,135
