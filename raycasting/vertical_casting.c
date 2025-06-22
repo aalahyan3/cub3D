@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:47:35 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/20 20:14:40 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/22 15:18:55 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	vertical_casting(t_rays *rays, t_player *player, t_map *map)
 	{
 		if (has_aw_wall((int )vc.nx - rays->left, (int)vc.ny, map))
 		{
-			rays->Wall_hit_x_v = vc.nx;
-			rays->Wall_hit_y_v = vc.ny;
+			rays->wall_hit_x_v = vc.nx;
+			rays->wall_hit_y_v = vc.ny;
 			rays->found_ver = 1;
 			break ;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moving_and_hook.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/21 15:01:01 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/22 15:18:55 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,12 @@ int	handle_keys(void *param)
 	else
 		frame_stop++;
 
-	mlx_put_image_to_window(d->mlx, d->mlx_win, frame, WIN_WIDTH / 2 + 80 + frame_delta[0], WIN_HEIGHT - 160 + frame_delta[0]);
-	mlx_put_image_to_window(d->mlx, d->mlx_win, d->crosshair.img, WIN_WIDTH / 2 - 25, WIN_HEIGHT / 2 - 25);
+	mlx_put_image_to_window(d->mlx, d->mlx_win, frame, 
+		WIN_WIDTH / 2 + 80 + frame_delta[0],
+		WIN_HEIGHT - 160 + frame_delta[0]);
+	mlx_put_image_to_window(d->mlx, d->mlx_win, d->crosshair.img,
+		WIN_WIDTH / 2 - 25,
+		WIN_HEIGHT / 2 - 25);
 	mlx_put_image_to_window(d->mlx, d->mlx_win, minimap, 0, 0);
 	mlx_destroy_image(d->mlx, minimap);
 	return (0);
@@ -110,7 +114,9 @@ int	handle_keys(void *param)
 int	key_press(int keycode, void *param)
 {
 
-	t_all_data *data = (t_all_data *)param;
+	t_all_data	*data;
+
+	data = (t_all_data *)param;
 	if (keycode == 13)
 		data->keys.w = 1;
 	if (keycode == 1)
@@ -148,7 +154,5 @@ int	key_release(int keycode, t_all_data *data)
 		data->keys.left = 0;
 	if (keycode == 124)
 		data->keys.right = 0;
-	// if (keycode == 49)
-	// 	data->keys.right = 0;
 	return (0);
 }

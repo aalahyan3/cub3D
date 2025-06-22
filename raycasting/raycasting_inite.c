@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:39:00 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/20 15:18:38 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/22 15:18:55 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	init_rays(t_rays *rays, int num_rays, double player_ang, int i)
 	rays->left = !rays->right;
 	rays->hori_distance = 0;
 	rays->ver_distance = 0;
-	rays->Wall_hit_x_h = 0;
-	rays->Wall_hit_y_h = 0;
-	rays->Wall_hit_x_v = 0;
-	rays->Wall_hit_y_v = 0;
-	rays->Wall_hit_y = 0;
-	rays->Wall_hit_x = 0;
+	rays->wall_hit_x_h = 0;
+	rays->wall_hit_y_h = 0;
+	rays->wall_hit_x_v = 0;
+	rays->wall_hit_y_v = 0;
+	rays->wall_hit_y = 0;
+	rays->wall_hit_x = 0;
 	rays->found_ver = 0;
 	rays->found_hori = 0;
 	rays->rays_dis = 0;
