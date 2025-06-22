@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:50:07 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 17:09:11 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/22 14:08:03 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 # define ALL_DATA_STRUCT_H
 
 # include "../parsing/parsing.h"
-#define WIN_WIDTH 1000
-#define WIN_HEIGHT 800
-#define TILE_SIZE 80
-#define RADIUS 5
- typedef struct s_rays
+
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
+# define TILE_SIZE 80
+# define RADIUS 5
+
+typedef struct s_rays
 {
-	double ray_angl;
-	double ver_distance;
+	double	ray_angl;
+	double	ver_distance;
 	double	hori_distance;
 	double	Wall_hit_x_h;
 	double	Wall_hit_y_h;
@@ -29,7 +31,7 @@
 	double	Wall_hit_y_v;
 	double	Wall_hit_x;
 	double	Wall_hit_y;
-	double  rays_dis;
+	double 	rays_dis;
 	int		coulumn;
 	short	up;
 	short	down;
@@ -39,17 +41,17 @@
 	short	found_ver;
 }	t_rays;
 
- typedef struct s_keys
+typedef struct s_keys
 {
-	int w;
-	int s;
-	int a;
-	int d;
-	int left;
-	int right;
-    int space;
-    int up;
-    int down;
+	int	w;
+	int	s;
+	int	a;
+	int	d;
+	int	left;
+	int	right;
+    int	space;
+    int	up;
+    int	down;
 }	t_keys;
 
 // typedef struct s_texture {

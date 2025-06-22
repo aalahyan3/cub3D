@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:56:54 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/21 15:40:57 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/22 14:12:04 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@ void	ft_put_pixel(t_img *image, int x, int y, int color)
 
 	if (x < 0 || x >= image->width || y < 0 || y >= image->height)
 		return ;
-	dst = image->addr + (y * image->line_length) + (x * (image->bits_per_pixel / 8));
+	dst = image->addr + \
+	(y * image->line_length) + (x * (image->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
-void	draw_circle(t_minimap *minimap, int cx, int cy, int radius, int color)
+void	draw_circle(t_minimap *minimap, int cx, int cy, int radius)
 {
 	int	x;
 	int	y;
 	int	radius_sq;
 
-	radius_sq = radius * radius;
 	y = -radius;
 	while (y <= radius)
 	{
 		x = -radius;
 		while (x <= radius)
 		{
-			if (x * x + y * y <= radius_sq)
-				ft_put_pixel(minimap->image, cx + x, cy + y, color);
+			if (x * x + y * y <= pow(radius, 2))
+				ft_put_pixel(minimap->image, cx + x, cy + y, 0xff0000);
 			x++;
 		}
 		y++;
@@ -83,7 +83,7 @@ void	fill_image(t_all_data *data, t_minimap *minimap)
 		}
 		y++;
 	}
-	draw_circle(minimap, minimap->width / 2, minimap->height / 2,3 , 0xff0000);
+	draw_circle(minimap, minimap->width / 2, minimap->height / 2, 3);
 }
 
 void	*get_minimap(t_all_data *data)

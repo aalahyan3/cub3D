@@ -6,13 +6,13 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 16:52:47 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/21 15:00:06 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/22 14:05:33 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
 
-static void destroy_textures(t_all_data *data)
+static void	destroy_textures(t_all_data *data)
 {
 	mlx_destroy_image(data->mlx, data->map->e_texture.img);
 	mlx_destroy_image(data->mlx, data->map->n_texture.img);

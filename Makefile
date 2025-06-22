@@ -4,23 +4,19 @@ SRC_ROOT = main.c load_textures.c
 SRC_BONUS = _bonus/minimap_bonus.c _bonus/get_animation_bonus.c _bonus/mouse_handler_bonus.c 
 OBJ = $(SRC_RC:.c=.o) $(SRC_PS:.c=.o) $(SRC_ROOT:.c=.o) $(SRC_BONUS:.c=.o)
 NAME = cub3D
+HEADERS = raycasting/all_data_struct.h raycasting/raycasting.h parsing/parsing.h _bonus/_bonus.h cub3d.h
 FLAGS = #-Wall -Wextra -Werror
 CC = cc
 
 all bonus: libft $(NAME)
 
-$(NAME): $(OBJ) cub3d.h
+$(NAME): $(OBJ) $(HEADERS)
 	$(CC) $(FLAGS) $(OBJ) -lft -Llibft -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 libft:
 	make -C libft
 
-raycasting/%.o: raycasting/%.c raycasting/raycasting.h
-	$(CC) $(FLAGS) -c $< -o $@
-parsing/%.o: parsing/%.c parsing/parsing.h
-	$(CC) $(FLAGS) -c $< -o $@
-_bonus/%.o: _bonus/%.c _bonus/_bonus.h
-./%.o: ./%.c cub3d.h
+%.o: ./%.c $(HEADERS)
 	$(CC) $(FLAGS) -c $< -o $@
 clean:
 	rm -f $(OBJ)

@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/21 15:05:38 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/22 14:03:56 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ void	draw_floor_and_ceiling(void *img, int ceiling_color, int floor_color)
 	}
 }
 
-void draw(t_all_data *data)
+void	draw(t_all_data *data)
 {
 	clear_image(&data->img);
-	draw_floor_and_ceiling(&data->img, data->map->ceil_color, data->map->floor_color);
-	start_casting(&data->player, &data->img, data->map,data);
+	draw_floor_and_ceiling(&data->img, \
+	data->map->ceil_color, data->map->floor_color);
+	start_casting(&data->player, &data->img, data->map, data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
 }
 
@@ -57,8 +58,7 @@ void	init_data(t_all_data *data, int ac, char **av)
 	t_img		image;
 
 	ft_memset(data, 0, sizeof(t_all_data));
-	data->map = parse(ac, av);
-	data->mlx = mlx_init();
+	1 && (data->map = parse(ac, av), data->mlx = mlx_init());
 	if (!data->mlx)
 	{
 		clear_map(data->map);
@@ -71,15 +71,14 @@ void	init_data(t_all_data *data, int ac, char **av)
 	image.img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!image.img)
 		cleanup(data, 1);
-	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian);
+	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, \
+	&image.line_length, &image.endian);
 	if (!image.addr)
 		cleanup(data, 1);
-	data->img = image;
 	player_inite(&player, data->map->px, data->map->py, data->map->i_angle);
 	data->player = player;
 	ft_bzero(&data->keys, sizeof(t_keys));
-	data->minimap_scale = 5;
-	data->cursor_x = -1;
+	1 && (data->img = image, data->minimap_scale = 5, data->cursor_x = -1);
 }
 
 int	main(int ac, char **av)
