@@ -3,7 +3,7 @@ EA ./textures/planks_3.xpm
 WE ./textures/planks_3.xpm
 SO ./textures/planks.xpm
 
-F     0,000,0
+F     48,25,11
 C     49,82,135
 
  1111111        111111111

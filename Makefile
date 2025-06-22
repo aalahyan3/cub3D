@@ -3,11 +3,11 @@ SRC_PS = parsing/parse.c parsing/clear_map.c parsing/fill_map_data.c parsing/map
 SRC_ROOT = main.c load_textures.c
 SRC_BONUS = _bonus/minimap_bonus.c _bonus/get_animation_bonus.c _bonus/mouse_handler_bonus.c 
 OBJ = $(SRC_RC:.c=.o) $(SRC_PS:.c=.o) $(SRC_ROOT:.c=.o) $(SRC_BONUS:.c=.o)
-NAME = cub3d
-FLAGS = -fsanitize=address#-Wall -Wextra -Werror
+NAME = cub3D
+FLAGS = #-Wall -Wextra -Werror
 CC = cc
-$(info YOUR_VAR = $(SRC_RC))
-all: libft $(NAME)
+
+all bonus: libft $(NAME)
 
 $(NAME): $(OBJ) cub3d.h
 	$(CC) $(FLAGS) $(OBJ) -lft -Llibft -lmlx -framework OpenGL -framework AppKit -o $(NAME)

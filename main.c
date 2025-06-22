@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:28:06 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/21 15:01:08 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:05:38 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,14 @@ void	init_data(t_all_data *data, int ac, char **av)
 		cleanup(data, 1);
 	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian);
 	if (!image.addr)
-		cleanup(data ,1);
+		cleanup(data, 1);
 	data->img = image;
 	player_inite(&player, data->map->px, data->map->py, data->map->i_angle);
 	data->player = player;
-	data->keys.a = 0;
-	data->keys.s = 0;
-	data->keys.w = 0;
-	data->keys.d = 0;
-	data->keys.left = 0;
-	data->keys.right = 0;
-	data->keys.space = 0;
-	data->keys.up = 0;
-	data->keys.down = 0;
+	ft_bzero(&data->keys, sizeof(t_keys));
 	data->minimap_scale = 5;
+	data->cursor_x = -1;
 }
-
 
 int	main(int ac, char **av)
 {

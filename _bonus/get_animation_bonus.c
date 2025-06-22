@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:30:57 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 16:47:24 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:41:33 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*get_animation_frame(t_all_data *data)
 	static int	show_counter = 0;
 	int			stop_at;
 
-	stop_at = 7;
+	stop_at = 5;
 	if (data->player.shot == 0)
 		return (data->frames[0].img);
 	if (show_counter >= stop_at)
@@ -37,4 +37,3 @@ void	*get_animation_frame(t_all_data *data)
 		show_counter++;
 	return (data->frames[frame_counter].img);
 }
-
