@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:57:33 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/22 15:18:55 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/23 11:34:48 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	draw_strip(int x, t_all_data *data, t_proj pr)
 	{
 		distance_from_top = (y + (pr.strip_h / 2) - (WIN_HEIGHT / 2));
 		data->tex_data.tex_y = (int)((distance_from_top / pr.strip_h)
-				* data->tex_data.tex->width);
+				* data->tex_data.tex->height);
 		if (data->tex_data.tex_y < 0)
 			data->tex_data.tex_y = 0;
 		else if (data->tex_data.tex_y >= data->tex_data.tex->height)
