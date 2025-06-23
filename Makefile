@@ -5,7 +5,7 @@ SRC_BONUS = _bonus/minimap_bonus.c _bonus/get_animation_bonus.c _bonus/mouse_han
 OBJ = $(SRC_RC:.c=.o) $(SRC_PS:.c=.o) $(SRC_ROOT:.c=.o) $(SRC_BONUS:.c=.o)
 NAME = cub3D
 HEADERS = raycasting/all_data_struct.h raycasting/raycasting.h parsing/parsing.h _bonus/_bonus.h cub3d.h
-FLAGS = #-wall -Wextra -Werror
+FLAGS = #-Wall -Wextra -Werror
 CC = cc
 
 all bonus: libft $(NAME)
