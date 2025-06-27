@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   moving_and_hook.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/22 15:18:55 by zkhourba         ###   ########.fr       */
+/*   Created: 2025/06/27 10:40:47 by aalahyan          #+#    #+#             */
+/*   Updated: 2025/06/27 10:44:13 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "raycasting.h"
 
@@ -54,35 +53,13 @@ void	move_player(t_all_data *d, double *nx, double *ny)
 	}
 }
 
-
-int	handle_keys(void *param)
+void	draw_animation(t_all_data *data)
 {
-	double	nx;
-	double	ny;
-	void	*minimap;
-	void	*frame;
 	static int	frame_delta[2] = {0, 10};
 	static int	increaments[2] = {1, 1};
-	static int	frame_stop = 0;
-	t_all_data	*d;
-	d = (t_all_data *)param;
-	mlx_clear_window(d->mlx, d->mlx_win);
-	rotate_player(&d->player, d->keys);
-	nx = d->player.x;
-	ny = d->player.y;
-	move_player(d, &nx, &ny);
-	if (!has_wall_with_radius((int)nx, (int)ny,RADIUS, d->map))
-	{
-		d->player.x = nx;
-		d->player.y = ny;
-	}
-	draw(d);
-	minimap = get_minimap(d);
-	frame = get_animation_frame(d);
-	if (d->keys.space)
-	{
-			d->player.shot = 1;
-	}
+	static int	frame_counter = 0;
+	void		*frame;
+
 	if (frame_delta[0] == 10)
 		increaments[0] = -1;
 	else if (frame_delta[0] == 0)
@@ -91,68 +68,44 @@ int	handle_keys(void *param)
 		increaments[1] = -2;
 	else if (frame_delta[1] == 0)
 		increaments[1] = 2;
-	if (frame_stop >= 5)
-	{
-		frame_delta[0] += increaments[0];
-		frame_delta[1] += increaments[1];
-		frame_stop = 0;
-	}
+	if (frame_counter >= 5)
+		1 && (frame_delta[0] += increaments[0], \
+		frame_delta[1] += increaments[1], frame_counter = 0);
 	else
-		frame_stop++;
+		frame_counter++;
+	if (data->keys.space)
+		data->player.shot = 1;
+	frame = get_animation_frame(data);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, frame, \
+	WIN_WIDTH / 2 + 80 + frame_delta[0], \
+WIN_HEIGHT - 160 + frame_delta[0]);
+}
 
-	mlx_put_image_to_window(d->mlx, d->mlx_win, frame, 
-		WIN_WIDTH / 2 + 80 + frame_delta[0],
-		WIN_HEIGHT - 160 + frame_delta[0]);
+int	handle_keys(void *param)
+{
+	double		nx;
+	double		ny;
+	void		*minimap;
+	t_all_data	*d;
+
+	d = (t_all_data *)param;
+	mlx_clear_window(d->mlx, d->mlx_win);
+	rotate_player(&d->player, d->keys);
+	nx = d->player.x;
+	ny = d->player.y;
+	move_player(d, &nx, &ny);
+	if (!has_wall_with_radius((int)nx, (int)ny, RADIUS, d->map))
+	{
+		d->player.x = nx;
+		d->player.y = ny;
+	}
+	draw(d);
+	draw_animation(d);
+	minimap = get_minimap(d);
 	mlx_put_image_to_window(d->mlx, d->mlx_win, d->crosshair.img,
 		WIN_WIDTH / 2 - 25,
 		WIN_HEIGHT / 2 - 25);
 	mlx_put_image_to_window(d->mlx, d->mlx_win, minimap, 0, 0);
 	mlx_destroy_image(d->mlx, minimap);
-	return (0);
-}
-
-int	key_press(int keycode, void *param)
-{
-
-	t_all_data	*data;
-
-	data = (t_all_data *)param;
-	if (keycode == 13)
-		data->keys.w = 1;
-	if (keycode == 1)
-		data->keys.s = 1;
-	if (keycode == 0)
-		data->keys.a = 1;
-	if (keycode == 2)
-		data->keys.d = 1;
-	if (keycode == 123)
-		data->keys.left = 1;
-	if (keycode == 124)
-		data->keys.right = 1;
-	if (keycode == 49)
-		data->keys.space = 1;
-	if (keycode == 125)
-		data->keys.down = 1;
-	if (keycode == 126)
-		data->keys.up = 1;
-	if (keycode == 53)
-		cleanup(data, 0);
-	return (0);
-}
-
-int	key_release(int keycode, t_all_data *data)
-{
-	if (keycode == 13)
-		data->keys.w = 0;
-	if (keycode == 1)
-		data->keys.s = 0;
-	if (keycode == 0)
-		data->keys.a = 0;
-	if (keycode == 2)
-		data->keys.d = 0;
-	if (keycode == 123)
-		data->keys.left = 0;
-	if (keycode == 124)
-		data->keys.right = 0;
 	return (0);
 }

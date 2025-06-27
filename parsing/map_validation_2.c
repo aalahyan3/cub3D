@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 14:13:52 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/26 16:21:55 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/27 10:51:54 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	get_longest_row(char **map)
 	longest = 0;
 	while (map[i])
 	{
-		if (ft_strlen(map[i]) > longest)
+		if ((int)ft_strlen(map[i]) > longest)
 			longest = ft_strlen(map[i]);
 		i++;
 	}
@@ -98,13 +98,13 @@ void	adjust_map_structure(char **map)
 	1 && (longest = get_longest_row(map), i = 0);
 	while (map[i])
 	{
-		if (ft_strlen(map[i]) < longest)
+		if ((int)ft_strlen(map[i]) < longest)
 		{
 			j = 0;
 			new = malloc(sizeof(char) * (longest + 1));
 			if (!new)
 				return ;
-			while (j < ft_strlen(map[i]))
+			while (j < (int)ft_strlen(map[i]))
 				1 && (new[j] = map[i][j], j = j + 1);
 			while (j < longest)
 				new[j++] = ' ';

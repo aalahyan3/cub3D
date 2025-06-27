@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:56:54 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/22 14:12:04 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/27 10:52:02 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	draw_circle(t_minimap *minimap, int cx, int cy, int radius)
 {
 	int	x;
 	int	y;
-	int	radius_sq;
 
 	y = -radius;
 	while (y <= radius)
