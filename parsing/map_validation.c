@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:54:20 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/22 15:18:55 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/27 10:15:11 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ bool	map_validation(char **map, t_map *map_s)
 		return (false);
 	if (map_has_newlines(map))
 	{
-		ft_putstr_fd("Error\nthe map \
-		rows must not be separated by newlines\n", 2);
+		ft_putstr_fd("Error\nthe map rows must \
+not be separated by newlines\n", 2);
 		return (false);
 	}
 	adjust_map_structure(map);

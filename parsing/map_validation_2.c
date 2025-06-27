@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 14:13:52 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/22 15:18:55 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/27 10:51:54 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static bool	valid_wall(char **arr, int i, int j)
 	if ((i == 0 || j == 0 || !arr[i + 1] || !arr[i][j + 1]) \
 	&& (arr[i][j] != ' ' && arr[i][j] != '1'))
 	{
-		ft_putstr_fd("Error\nthe arr must be surrounded by wall1\n", 2);
+		ft_putstr_fd("Error\nthe map must be surrounded by wall1\n", 2);
 		return (false);
 	}
 	if (arr[i][j] == ' ')
@@ -81,7 +81,7 @@ static int	get_longest_row(char **map)
 	longest = 0;
 	while (map[i])
 	{
-		if (ft_strlen(map[i]) > longest)
+		if ((int)ft_strlen(map[i]) > longest)
 			longest = ft_strlen(map[i]);
 		i++;
 	}
@@ -98,13 +98,13 @@ void	adjust_map_structure(char **map)
 	1 && (longest = get_longest_row(map), i = 0);
 	while (map[i])
 	{
-		if (ft_strlen(map[i]) < longest)
+		if ((int)ft_strlen(map[i]) < longest)
 		{
 			j = 0;
 			new = malloc(sizeof(char) * (longest + 1));
 			if (!new)
 				return ;
-			while (j < ft_strlen(map[i]))
+			while (j < (int)ft_strlen(map[i]))
 				1 && (new[j] = map[i][j], j = j + 1);
 			while (j < longest)
 				new[j++] = ' ';

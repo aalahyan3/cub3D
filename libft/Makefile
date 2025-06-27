@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+         #
+#    By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 16:23:56 by aalahyan          #+#    #+#              #
-#    Updated: 2025/06/22 15:18:55 by zkhourba         ###   ########.fr        #
+#    Updated: 2025/06/22 18:33:23 by aalahyan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC=cc
 BINDIR=bin
-CFLAGS=-wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror
 CFILES=		ft_atoi.c\
 			ft_bzero.c\
 			ft_calloc.c\

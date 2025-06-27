@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/23 14:48:28 by zkhourba         ###   ########.fr       */
+/*   Created: 2025/06/27 10:41:06 by aalahyan          #+#    #+#             */
+/*   Updated: 2025/06/27 15:30:17 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <string.h>
 
 # include "../parsing/parsing.h"
-# define FOV 60	* (M_PI / 180)
+# define FOV 1.0471975512
 
 # define ROTATION_SPEED 0.03
 # include "all_data_struct.h"
