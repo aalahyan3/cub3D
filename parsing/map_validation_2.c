@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 14:13:52 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/22 15:18:55 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/26 16:21:55 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static bool	valid_wall(char **arr, int i, int j)
 	if ((i == 0 || j == 0 || !arr[i + 1] || !arr[i][j + 1]) \
 	&& (arr[i][j] != ' ' && arr[i][j] != '1'))
 	{
-		ft_putstr_fd("Error\nthe arr must be surrounded by wall1\n", 2);
+		ft_putstr_fd("Error\nthe map must be surrounded by wall1\n", 2);
 		return (false);
 	}
 	if (arr[i][j] == ' ')
