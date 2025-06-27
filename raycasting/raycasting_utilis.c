@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:41:55 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/06/20 20:17:17 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:05:03 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 
 void	clear_image(t_img *img)
 {
-	memset(img->addr, 0, img->line_length * WIN_HEIGHT);
+	ft_memset(img->addr, 0, img->line_length * WIN_HEIGHT);
 }
 
 double	normalize_angle(double angle)
