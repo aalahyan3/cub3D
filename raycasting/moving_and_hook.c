@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 10:40:47 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/27 10:44:13 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:39:56 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ int	handle_keys(void *param)
 	draw_animation(d);
 	minimap = get_minimap(d);
 	mlx_put_image_to_window(d->mlx, d->mlx_win, d->crosshair.img,
-		WIN_WIDTH / 2 - 25,
-		WIN_HEIGHT / 2 - 25);
+		WIN_WIDTH / 2 - 25 / 2,
+		WIN_HEIGHT / 2 - 25 / 2);
 	mlx_put_image_to_window(d->mlx, d->mlx_win, minimap, 0, 0);
 	mlx_destroy_image(d->mlx, minimap);
 	return (0);

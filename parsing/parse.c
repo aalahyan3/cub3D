@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 15:04:44 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/28 14:06:38 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:37:49 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	valid_extension(char *filename)
 	char	*ext;
 
 	ext = ft_strrchr(filename, '.');
-	if (!ext || ext == filename)
+	if (!ext)
 		return (false);
 	return (ft_strncmp(ext, ".cub", 5) == 0);
 }
