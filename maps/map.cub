@@ -3,7 +3,7 @@ EA ./textures/wall_c_small_new_1.xpm
 WE ./textures/wall_c_small.xpm
 SO ./textures/wall_c_small_new.xpm
 
-F     28,25,11
+F   28,25,11
 C     49,82,135
 
  1111111        111111111
