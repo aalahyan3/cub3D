@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 16:37:33 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/20 20:09:33 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/28 13:39:07 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	fill_map_data(t_map *map, int fd)
 			if (helper_infos[0] != 6)
 			{
 				ft_putstr_fd("Error\nthe map was \
-				found before all data provided.\n", 2);
+found before all data provided.\n", 2);
 				exit_error(map, line, fd);
 			}
 			start_map_reading(map, line, fd);

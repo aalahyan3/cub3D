@@ -6,7 +6,7 @@
 /*   By: aalahyan <aalahyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:54:20 by aalahyan          #+#    #+#             */
-/*   Updated: 2025/06/27 10:15:11 by aalahyan         ###   ########.fr       */
+/*   Updated: 2025/06/28 13:38:30 by aalahyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,12 @@ bool	map_has_newlines(char **map)
 
 bool	map_validation(char **map, t_map *map_s)
 {
+	if (!map)
+	{
+		ft_putstr_fd("Error\nthe map was not found!\n", 2);
+		return (false);
+	}
+		return (false);
 	if (!valid_elements(map))
 		return (false);
 	if (map_has_newlines(map))
